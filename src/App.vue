@@ -3,7 +3,7 @@
   <div class="wrapper">
     <Header/>
     <div class="columns is-centered is-vcentered pt-2">
-      <div class="column is-3-desktop px-5 py-5 is-5-tablet is-12-mobile ">
+      <div class="px-5 py-5 is-5-tablet is-12-mobile ">
         <WordRow
           v-for="(guess, i) in this.$store.state.guesses"
           :key="i"

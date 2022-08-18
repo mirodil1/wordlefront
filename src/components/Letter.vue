@@ -1,6 +1,6 @@
 <template>
     <div 
-        class="column is-2-desktop is-2-tablet is-2-mobile letter-border has-text-centered m-1 has-text-weight-bold	"
+        class="letter-border has-text-centered m-1 has-text-weight-bold	"
         :class="{
             'has-background-grey-light has-text-white'
              : color == 'gray',
@@ -37,19 +37,21 @@ export default {
 
 <style scoped>
     .letter-border {
-        width: 100%;
+        width: 60px;
         height: 60px;
         font-size: 2rem;
-        line-height: 2rem;
+        /* line-height: 55px; */
         border: 2px solid #d3d6da;
         box-sizing: border-box;
         text-transform: uppercase;
     }
     @media only screen and (max-width: 500px) {
         .letter-border {
+            width: 55px;
             height: 55px;
-            line-height: 2rem;
-            text-align: center; 
+            line-height: 3rem;
+            text-align: center;
+            font-size: 25px;
         }
     }
     @media only screen and (min-width: 320px) 
@@ -58,7 +60,7 @@ export default {
             height: 40px;
             box-sizing: border-box;
             text-align: center;
-            line-height: 12px;
+            line-height: 20px;
             font-size: 25px;
         }
     }
