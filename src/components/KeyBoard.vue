@@ -1,6 +1,6 @@
 <template>
   <div>
-    <div class="simple-keyboard"></div>
+    <div :class="keyboardClass" class="found" ></div>
   </div>
 </template>
 
@@ -18,7 +18,9 @@ export default {
       default: "simple-keyboard",
       type: String
     },
-    guessedLetters: Object,
+    guessedLetters: {
+      type: Object
+    },
     input: {
       type: String
     }
@@ -28,24 +30,33 @@ export default {
      this.keyboard = new Keyboard(this.keyboardClass, {
       layout: {
         'default': [
-          "q w e r t y u i o p ó",
-          ' a s d f g h j k l ',
-          '{enter} z x c v b n m {bksp}',
+          
+          "Ё Й Й Ц У К Е Н Г Ш Ў З Х Ъ",
+          'Ф Қ В А П Р О Л Д Ж Э',
+          'Я Ч С М И Т Ь Б Ю Ғ Ҳ {bksp}',
+          "{enter}",
         ]
+      },
+      display: {
+        '{bksp}': '⌫',
+        '{enter}': 'Текшириш'
       },
       onChange: this.onChange,
       onKeyPress: this.onKeyPress
     });
+    
   },
   watch: {
     guessedLetters: {
       handler(guessedLetters) {
+        console.log("keyboard")
         this.keyboard.addButtonTheme(
           guessedLetters.miss.join(" "), 
           "miss"
         );
+        console.log(guessedLetters.found.map(name => name.toUpperCase()).join(" "), "found");
         this.keyboard.addButtonTheme(
-          guessedLetters.found.join(" "), 
+          guessedLetters.found.map(name => name.toUpperCase()).join(" "),
           "found"
         );
         this.keyboard.addButtonTheme(
@@ -53,7 +64,7 @@ export default {
           "hint"
         );
       },
-    deep: true
+    // deep: true
     }
   },
   methods: {
@@ -61,7 +72,8 @@ export default {
       this.$emit("onChange", input);
     },
     onKeyPress(button) {
-      this.$emit("onKeyPress", button);
+      this.$emit("onKeyPress", button.toLowerCase());
+      console.log(this.keyboard.addButtonTheme())
     }
   }
 }
@@ -75,7 +87,11 @@ export default {
   #div.found {
     background-color: green !important;
   }
-  #div.hint {
+  .hint {
     background-color: yellow !important;
   }
+  .hg-red {
+    background-color: red;
+  }
+  
 </style>

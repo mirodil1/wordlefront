@@ -1,5 +1,5 @@
 <template>
-    <div class="title pt-5 pb-2 is-size-6-mobile">WORDLE</div>
+    <div class="title pt-5 pb-2 is-size-6-mobile"><span class="animate__animated animate__bounce">WORDLE</span></div>
 </template>
 
 <script>

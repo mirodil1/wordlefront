@@ -1,13 +1,15 @@
 <template>
     <div 
-        class="letter-border has-text-centered m-1 has-text-weight-bold	"
+        class="letter-border has-text-centered m-1 has-text-weight-bold "
         :class="{
-            'has-background-grey-light has-text-white'
+            'has-background-grey-light has-text-white animate__animated animate__flipInX'
              : color == 'gray',
-            'has-background-success	has-text-white'
+            'has-background-success	has-text-white animate__animated animate__flipInX'
              : color == 'green',
-             'has-background-warning has-text-white'
-             : color == 'yellow'          
+             'has-background-warning has-text-white animate__animated animate__flipInX'
+             : color == 'yellow',
+            //  'animate__animated animate__shakeX'
+            //  : checked == true
         }"
     >
         {{letter}}
@@ -25,7 +27,7 @@ export default {
         color: {
             type: String,
             default: ""
-        }
+        },
     },
     // data() {
     //     return {
@@ -47,8 +49,8 @@ export default {
     }
     @media only screen and (max-width: 500px) {
         .letter-border {
-            width: 55px;
-            height: 55px;
+            width: 50px;
+            height: 50px;
             line-height: 3rem;
             text-align: center;
             font-size: 25px;
@@ -57,11 +59,13 @@ export default {
     @media only screen and (min-width: 320px) 
                        and (max-width: 375px){
         .letter-border {
+            width: 40px;
             height: 40px;
             box-sizing: border-box;
             text-align: center;
-            line-height: 20px;
+            line-height: 30px;
             font-size: 25px;
         }
     }
+
 </style>

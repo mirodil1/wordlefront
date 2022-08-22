@@ -1,6 +1,6 @@
 <template>
     <div class="column">
-        <div class="columns is-flex is-centered">
+        <div class="columns is-flex is-centered " :class="{'animate__animated animate__shakeX': isActive}">
             <Letter
                 v-for="i in 5"
                 :key="i"
@@ -13,6 +13,7 @@
 
 <script>
 import Letter from './Letter.vue'
+import { toast } from 'bulma-toast'
 
 export default {
     name: "WordRow",
@@ -23,7 +24,9 @@ export default {
     },
     data() {
         return {
-            colors: ["", "", "", "", ""]
+            colors: ["", "", "", "", ""],
+            isActive: false,
+            victoryMessage: ["ДАҲО", "АЖОЙИБ", "БАРАКАЛЛА", "ЗЎР", "ҚОЙИЛ", "УДДАЛАДИК"]
         }
     },
     components: {
@@ -39,7 +42,17 @@ export default {
                     if (s == v) {
                         localStorage.setItem('lastSubmitted', s)
                         this.$store.commit('checkWinner')
+                        toast({
+                            message: this.victoryMessage[this.$store.state.currentGuessIndex-1],
+                            type: 'is-success is-light',
+                            dismissible: false,
+                            animate: { in: 'backInDown', out: 'backOutDown' },
+                            pauseOnHover: false,
+                            duration: 2000,
+                            position: 'top-center',
+                        })
                     }
+                    
                     let temp = ["gray", "gray", "gray", "gray", "gray"];
                     let letterPool = [];
                     for (let i = 0; i < 5; i++) {
@@ -59,11 +72,12 @@ export default {
                         }
                         this.colors[i]= temp[i];
                         // console.log(this.colors[i])
-                        await new Promise((resolve) => setTimeout(resolve, 400));
+                        await new Promise((resolve) => setTimeout(resolve, 500));
                     }
+                        
                 }
             }
-        }
+        },
     },
     methods: {
     }
