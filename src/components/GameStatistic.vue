@@ -1,0 +1,90 @@
+<template>
+    <div class="modal p-6 animate__animated animate__fadeIn" v-bind:class="{'is-active': $store.state.isWinner}">
+        <div class="modal-background"></div>
+        <div class="">
+            <div class="card info pb-5">
+            <section class="card-body">
+            <p class="card-title pt-4 has-text-centered subtitle is-family-secondary is-size-4">HISOBOTLAR</p>
+            <div class="columns px-4 py-3 is-flex">
+                <div class="column px-4">
+                <p class="has-text-centered is-size-3">{{numberOfGames}}</p>
+                <p class="has-text-centered is-size-7">та ўйин</p>
+                </div>
+                <div class="column px-4">
+                <p class="has-text-centered is-size-3">100</p>
+                <p class="has-text-centered is-size-7">% ютуқ</p>
+                </div>
+                <div class="column px-4">
+                <p class="has-text-centered is-size-3">{{sequenceVictory}}</p>
+                <p class="has-text-centered is-size-7">Кетма-кет ғалаба</p>
+                </div>
+                <div class="column px-4">
+                <p class="has-text-centered is-size-3">{{sequenceVictoryRecord}}</p>
+                <p class="has-text-centered is-size-7">Кетма-кет ғалабалар рекорди</p>
+                </div>
+            </div>
+            <div class="columns px-4 is-flex">
+                <div class="column">
+                <p id="demo" class="has-text-bold has-text-centered is-size-6">Янги сўз киритилишини кутинг</p>
+                </div>
+                <div class="column">
+                <button class="button is-primary has-text-centered is-centered">ULASHISH</button>
+                </div>
+            </div>
+            </section>
+        </div>
+        </div>
+        <!-- <button class="modal-close is-large" aria-label="close"></button> -->
+    </div>
+</template>
+
+<script>
+export default {
+    name: "GameStatistic",
+    data() {
+       return {
+            numberOfGames: this.$store.state.numberOfGames,
+            sequenceVictory: this.$store.state.sequenceVictory,
+            sequenceVictoryRecord: this.$store.state.sequenceVictoryRecord
+       } 
+    },
+    mounted() {
+        this.$store.commit('checkNumberOfGames')
+    },
+    methods: {
+            // let counter = localStorage.getItem("NumberOfGames");
+        // localStorage.setItem("NumberOfGames", this.counter++);
+        // console.log(localStorage.getItem("dawokpfasf"))
+        
+        // timer() {
+        //     var countDownDate = new Date("Aug 23, 2022 14:36:00 GMT-09:00").getTime() + new Date().getTime();
+        //     // Update the count down every 1 second
+        //     var x = setInterval(function() {
+
+        //     // Get today's date and time
+        //     var now = new Date().getTime();
+                
+        //     // Find the distance between now and the count down date
+        //     var distance = countDownDate - now;
+            
+        //     // Time calculations for days, hours, minutes and seconds
+        //     //var days = Math.floor(distance / (1000 * 60 * 60 * 24));
+        //     var hours = Math.floor((distance % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60));
+        //     var minutes = Math.floor((distance % (1000 * 60 * 60)) / (1000 * 60));
+        //     var seconds = Math.floor((distance % (1000 * 60)) / 1000);
+        //     // Output the result in an element with id="demo"
+        //     // this.timerP = hours + ":"
+        //     // + minutes + ":" + seconds;
+        //     document.getElementById("demo").innerHTML = hours + ":"
+        //     + minutes + ":" + seconds;
+                
+        //     // If the count down is over, write some text 
+        //     if (distance < 0) {
+        //         clearInterval(x);
+        //     }
+        //     }, 1000);
+        // }
+    }
+
+}
+</script>

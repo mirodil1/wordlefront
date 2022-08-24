@@ -38,21 +38,6 @@ export default {
                 if (submitted) {
                     let s = this.solution;
                     let v = this.value;
-                    console.log(s, v)
-                    if (s == v) {
-                        localStorage.setItem('lastSubmitted', s)
-                        this.$store.commit('checkWinner')
-                        toast({
-                            message: this.victoryMessage[this.$store.state.currentGuessIndex-1],
-                            type: 'is-success is-light',
-                            dismissible: false,
-                            animate: { in: 'backInDown', out: 'backOutDown' },
-                            pauseOnHover: false,
-                            duration: 2000,
-                            position: 'top-center',
-                        })
-                    }
-                    
                     let temp = ["gray", "gray", "gray", "gray", "gray"];
                     let letterPool = [];
                     for (let i = 0; i < 5; i++) {
@@ -74,7 +59,46 @@ export default {
                         // console.log(this.colors[i])
                         await new Promise((resolve) => setTimeout(resolve, 500));
                     }
+                    
+                    if (s == v) {
+                        localStorage.setItem('lastSubmitted', s)
+                        this.$store.commit('checkWinner')
+                        toast({
+                            message: this.victoryMessage[this.$store.state.currentGuessIndex-1],
+                            type: 'is-success is-light',
+                            dismissible: false,
+                            animate: { in: 'backInDown', out: 'backOutDown' },
+                            pauseOnHover: false,
+                            duration: 2000,
+                            position: 'top-center',
+                        })
+                        this.$store.commit('checkNumberOfGames')
+                        // let numberOfsequenceVictory = this.$store.state.sequenceVictory+1
+                        // localStorage.setItem("numberOfsequenceVictory", numberOfsequenceVictory)
                         
+                        // if (numberOfsequenceVictory > this.$store.state.sequenceVictoryRecord) {
+                        //     this.$store.state.sequenceVictoryRecord = numberOfsequenceVictory
+                        //     localStorage.setItem("numberOfsequenceVictoryRecord", this.$store.state.sequenceVictoryRecord)
+                        // }
+
+
+                    } else if (this.$store.state.currentGuessIndex >= 6) {
+                        toast({
+                            message: this.$store.state.solution,
+                            type: 'is-dark is-light',
+                            dismissible: false,
+                            animate: { in: 'backInDown', out: 'backOutDown' },
+                            pauseOnHover: false,
+                            duration: 2000,
+                            position: 'top-center',
+                        })
+                        // this.$store.state.sequenceVictory = 0
+                        // localStorage.setItem("numberOfsequenceVictory", this.$store.state.sequenceVictory)
+                        this.$store.commit('checkNumberOfGames')
+                        this.$store.commit('checkWinner')
+                    }
+                    
+                    
                 }
             }
         },

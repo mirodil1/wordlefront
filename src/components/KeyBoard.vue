@@ -1,6 +1,6 @@
 <template>
   <div>
-    <div :class="keyboardClass" class="found" ></div>
+    <div :class="keyboardClass"></div>
   </div>
 </template>
 
@@ -52,19 +52,22 @@ export default {
         console.log("keyboard")
         this.keyboard.addButtonTheme(
           guessedLetters.miss.join(" "), 
-          "miss"
+          "is-dark"
         );
-        console.log(guessedLetters.found.map(name => name.toUpperCase()).join(" "), "found");
+        console.log(this.keyboard)
+        // console.log(guessedLetters.found.map(name => name.toUpperCase()).join(","), "found");
         this.keyboard.addButtonTheme(
           guessedLetters.found.map(name => name.toUpperCase()).join(" "),
-          "found"
+          "is-primary"
         );
+        // console.log(guessedLetters.found.join(" "),
+        //   "is-warning")
         this.keyboard.addButtonTheme(
           guessedLetters.found.join(" "),
-          "hint"
+          "is-warning"
         );
       },
-    // deep: true
+    deep: true
     }
   },
   methods: {

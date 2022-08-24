@@ -2,6 +2,9 @@
 
   <div class="wrapper">
     <Header/>
+    <About
+      :isActive="aboutStatus"
+    />
     <div class="columns is-centered is-vcentered pt-2">
       <div class="px-5 py-5 is-5-tablet is-12-mobile">
         <WordRow
@@ -14,46 +17,10 @@
       </div>
     </div>
     <div class="column">
-        <div class="modal p-6 animate__animated animate__fadeIn" v-bind:class="{'is-active': $store.state.isWinner}">
-            <div class="modal-background"></div>
-            <div class="">
-             <div class="card info pb-5">
-              <section class="card-body">
-                <p class="card-title pt-4 has-text-centered subtitle is-family-secondary is-size-4">HISOBOTLAR</p>
-                <div class="columns px-4 py-3 is-flex">
-                  <div class="column px-4">
-                    <p class="has-text-centered is-size-3">1</p>
-                    <p class="has-text-centered is-size-7">та ўйин</p>
-                  </div>
-                  <div class="column px-4">
-                    <p class="has-text-centered is-size-3">100</p>
-                    <p class="has-text-centered is-size-7">% ютуқ</p>
-                  </div>
-                  <div class="column px-4">
-                    <p class="has-text-centered is-size-3">1</p>
-                    <p class="has-text-centered is-size-7">Кетма-кет ғалаба</p>
-                  </div>
-                  <div class="column px-4">
-                    <p class="has-text-centered is-size-3">1</p>
-                    <p class="has-text-centered is-size-7">Кетма-кет ғалабалар рекорди</p>
-                  </div>
-                </div>
-                <div class="columns px-4 is-flex">
-                  <div class="column">
-                    <p>Янги сўз киритилишини кутинг</p>
-                  </div>
-                  <div class="column">
-                    <button class="button is-primary">ULASHISH</button>
-                  </div>
-                </div>
-              </section>
-            </div>
-            </div>
-            <!-- <button class="modal-close is-large" aria-label="close"></button> -->
-        </div>
-      </div>
-    <div class="columns px-3 pb-3 is-centered is-vcentered">
-      <div class="column is-4-desktop is-12-mobile is-8-tablet">
+      <GameStatistic/>
+    </div>
+    <div class="columns px-1 is-centered is-vcentered">
+      <div class="column is-5-desktop is-12-mobile is-8-tablet">
          <KeyBoard
           @keypress="onKeyPress"
           @onKeyPress="onKeyPress"
@@ -69,6 +36,8 @@
 import Header from './components/Header.vue';
 import WordRow from './components/WordRow.vue';
 import KeyBoard from './components/KeyBoard.vue';
+import About from './components/About.vue'
+import GameStatistic from './components/GameStatistic.vue'
 import { toast } from 'bulma-toast'
 
 export default {
@@ -76,20 +45,26 @@ export default {
   components: {
     Header,
     KeyBoard,
-    WordRow
+    WordRow,
+    About,
+    GameStatistic
   },
   data() {
     return {
       input: "",
+      el: '#app',
+      aboutStatus: true,
       // counter: localStorage.getItem("NumberOfGames")
     }
   },
   beforeMount() {
     console.log(this.$store.state.isWinner)
     this.$store.commit('checkWinner')
+    this.$store.commit("initializeValue")
   },
   mounted() {
     this.getWords()
+    this.$el.addEventListener('click', this.removeAbout)
     this.$store.commit('checkWinner') 
     window.addEventListener("keyup", (e) =>{
       e.preventDefault();
@@ -106,7 +81,7 @@ export default {
   methods: {
     getWords() {
       const now = new Date()
-      const start = new Date(2022, 0, 0)
+      const start = new Date(2022, 0, 2)
       const diff = Number(now) - Number(start)
       let day = Math.floor(diff / (1000 * 60 * 60 * 24))
       console.log(this.$store.state.words_list.length)
@@ -123,9 +98,6 @@ export default {
       const currentGuessIndex = this.$store.state.currentGuessIndex
       const currentGuess = guesses[currentGuessIndex]
       if (currentGuessIndex >= 6 || localStorage.getItem('lastSubmitted')==this.$store.state.solution) {
-        // let counter = localStorage.getItem("NumberOfGames");
-        // localStorage.setItem("NumberOfGames", this.counter++);
-        console.log(localStorage.getItem("NumberOfGames"))
         return;
       }
     
@@ -159,13 +131,17 @@ export default {
       } else if (button == "{bksp}") {
         guesses[currentGuessIndex] = currentGuess.slice(0, -1);
       } else if (currentGuess.length < 5) {
-        const alphaRegex = /[а-яА-Я,Ғ,Ҳ,Қ,ғ,ҳ,қ]/;
+        const alphaRegex = /[а-яА-Я,Ғ,Ҳ,Қ,Ё,Ў,ғ,ҳ,қ,ё,ў]/;
         if (alphaRegex.test(button)) {
           guesses[currentGuessIndex] += button;
         }
       }
       console.log("button", button);
     },
+    removeAbout() {
+      this.aboutStatus = false
+      console.log("clicked")
+    }
     
   }
 }
