@@ -1,6 +1,8 @@
 <template>
 
   <div class="wrapper">
+    <Ads
+    />
     <Header/>
     <About
       :isActive="aboutStatus"
@@ -38,6 +40,7 @@ import WordRow from './components/WordRow.vue';
 import KeyBoard from './components/KeyBoard.vue';
 import About from './components/About.vue'
 import GameStatistic from './components/GameStatistic.vue'
+import Ads from './components/Ads.vue';
 import { toast } from 'bulma-toast'
 
 export default {
@@ -47,7 +50,8 @@ export default {
     KeyBoard,
     WordRow,
     About,
-    GameStatistic
+    GameStatistic,
+    Ads,
   },
   data() {
     return {

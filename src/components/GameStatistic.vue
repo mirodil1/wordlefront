@@ -52,6 +52,10 @@ export default {
         this.$store.commit('checkNumberOfGames')
     },
     methods: {
+        copy() {
+        // this.$refs.clone.focus();
+        document.execCommand('copy');
+        }
             // let counter = localStorage.getItem("NumberOfGames");
         // localStorage.setItem("NumberOfGames", this.counter++);
         // console.log(localStorage.getItem("dawokpfasf"))
