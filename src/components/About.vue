@@ -1,9 +1,9 @@
 <template>
-    <div class="modal p-6 animate__animated"  :class="{'is-active animate__fadeIn': isActive, 'animate__fadeOut': !isActive}">
+    <div class="modal p-6 animate__animated"  :class="{'is-active animate__fadeIn': this.$store.state.aboutStatus}">
         <div class="modal-background"></div>
-        <div class="">
             <div class="modal-card game-help p-3">
                 <section class="modal-card-body">
+                    <button class="delete is-pulled-right" @click="removeAbout" aria-label="close"></button>
                     <div class="instruction">
                         <p>6 та уринишда кун <strong>СЎЗ</strong>ини топинг</p>
                         <br>
@@ -42,8 +42,8 @@
                         <p><strong>О</strong> ҳарфи СЎЗ ичида иштирок этмаган.</p>
                     </div>
                 </section>
+                
             </div>
-        </div>
     </div>
 </template>
 <script>
@@ -55,6 +55,11 @@ export default {
     setup() {
         
     },
+    methods: {
+        removeAbout() {
+          this.$store.state.aboutStatus = false
+        },
+    }
 }
 </script>
 

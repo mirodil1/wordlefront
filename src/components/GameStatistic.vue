@@ -1,5 +1,5 @@
 <template>
-    <div class="modal p-6 animate__animated animate__fadeIn" v-bind:class="{'is-active': $store.state.isWinner}">
+    <div class="modal p-6 animate__animated animate__fadeIn" v-bind:class="{'is-active': this.$store.state.isWinner}">
         <div class="modal-background"></div>
         <div class="">
             <div class="card info pb-5">
@@ -7,19 +7,19 @@
             <p class="card-title pt-4 has-text-centered subtitle is-family-secondary is-size-4">HISOBOTLAR</p>
             <div class="columns px-4 py-3 is-flex">
                 <div class="column px-4">
-                <p class="has-text-centered is-size-3">{{numberOfGames}}</p>
+                <p class="has-text-centered is-size-3">{{this.$store.state.numberOfGames}}</p>
                 <p class="has-text-centered is-size-7">та ўйин</p>
                 </div>
                 <div class="column px-4">
-                <p class="has-text-centered is-size-3">100</p>
+                <p class="has-text-centered is-size-3">{{this.$store.state.victoryPercentage}}</p>
                 <p class="has-text-centered is-size-7">% ютуқ</p>
                 </div>
                 <div class="column px-4">
-                <p class="has-text-centered is-size-3">{{sequenceVictory}}</p>
+                <p class="has-text-centered is-size-3">{{this.$store.state.sequenceVictory}}</p>
                 <p class="has-text-centered is-size-7">Кетма-кет ғалаба</p>
                 </div>
                 <div class="column px-4">
-                <p class="has-text-centered is-size-3">{{sequenceVictoryRecord}}</p>
+                <p class="has-text-centered is-size-3">{{this.$store.state.sequenceVictoryRecord}}</p>
                 <p class="has-text-centered is-size-7">Кетма-кет ғалабалар рекорди</p>
                 </div>
             </div>
@@ -28,7 +28,7 @@
                 <p id="demo" class="has-text-bold has-text-centered is-size-6">Янги сўз киритилишини кутинг</p>
                 </div>
                 <div class="column">
-                <button class="button is-primary has-text-centered is-centered">ULASHISH</button>
+                <button class="button is-primary has-text-centered is-centered" @click="copyToClipBoard">ULASHISH</button>
                 </div>
             </div>
             </section>
@@ -39,27 +39,29 @@
 </template>
 
 <script>
+import { toast } from 'bulma-toast'
 export default {
     name: "GameStatistic",
     data() {
        return {
-            numberOfGames: this.$store.state.numberOfGames,
-            sequenceVictory: this.$store.state.sequenceVictory,
-            sequenceVictoryRecord: this.$store.state.sequenceVictoryRecord
        } 
     },
     mounted() {
-        this.$store.commit('checkNumberOfGames')
     },
     methods: {
-        copy() {
-        // this.$refs.clone.focus();
-        document.execCommand('copy');
+        copyToClipBoard(){
+            let textToCopy = "https://t.me/gamewordlebot"
+            navigator.clipboard.writeText(textToCopy);    
+            toast({
+                message: "Кўчирилди",
+                type: 'is-success is-light',
+                dismissible: false,
+                animate: { in: 'backInDown', out: 'backOutDown' },
+                pauseOnHover: false,
+                duration: 2000,
+                position: 'top-center',
+            })
         }
-            // let counter = localStorage.getItem("NumberOfGames");
-        // localStorage.setItem("NumberOfGames", this.counter++);
-        // console.log(localStorage.getItem("dawokpfasf"))
-        
         // timer() {
         //     var countDownDate = new Date("Aug 23, 2022 14:36:00 GMT-09:00").getTime() + new Date().getTime();
         //     // Update the count down every 1 second
@@ -88,7 +90,7 @@ export default {
         //     }
         //     }, 1000);
         // }
-    }
+    },
 
 }
 </script>

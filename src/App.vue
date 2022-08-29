@@ -5,7 +5,6 @@
     />
     <Header/>
     <About
-      :isActive="aboutStatus"
     />
     <div class="columns is-centered is-vcentered pt-2">
       <div class="px-5 py-5 is-5-tablet is-12-mobile">
@@ -56,20 +55,14 @@ export default {
   data() {
     return {
       input: "",
-      el: '#app',
-      aboutStatus: true,
-      // counter: localStorage.getItem("NumberOfGames")
     }
   },
   beforeMount() {
-    console.log(this.$store.state.isWinner)
-    this.$store.commit('checkWinner')
+    // this.$store.commit('checkWinner')
     this.$store.commit("initializeValue")
   },
   mounted() {
     this.getWords()
-    this.$el.addEventListener('click', this.removeAbout)
-    this.$store.commit('checkWinner') 
     window.addEventListener("keyup", (e) =>{
       e.preventDefault();
       let button =
@@ -85,10 +78,29 @@ export default {
   methods: {
     getWords() {
       const now = new Date()
-      const start = new Date(2022, 0, 2)
+      const start = new Date(2022, 7, 29)
       const diff = Number(now) - Number(start)
+
+
       let day = Math.floor(diff / (1000 * 60 * 60 * 24))
-      console.log(this.$store.state.words_list.length)
+      if (localStorage.getItem("today")) {
+        // console.log("today")
+        if (parseInt(localStorage.getItem("today")) < day) {
+          console.log("somethong")
+          if (localStorage.getItem("lastSubmitted")!=this.$store.state.solution || parseInt(localStorage.getItem("currentGuessIndex"))>=6)  {
+            localStorage.setItem("currentGuessIndex", 0)
+            this.$store.state.isWinner = false
+            localStorage.setItem("today", day)
+          }
+        } else {
+            // console.log("else")
+            localStorage.setItem("today", day)
+          } 
+      }  else {
+          // console.log("else")
+          localStorage.setItem("today", day)
+      }
+      console.log(day)
       while (day > this.$store.state.words_list.length) {
         day -= this.$store.state.words_list.length
         console.log(day)
@@ -101,7 +113,7 @@ export default {
       const guesses = this.$store.state.guesses
       const currentGuessIndex = this.$store.state.currentGuessIndex
       const currentGuess = guesses[currentGuessIndex]
-      if (currentGuessIndex >= 6 || localStorage.getItem('lastSubmitted')==this.$store.state.solution) {
+      if (currentGuessIndex >= 6 || localStorage.getItem('lastSubmitted')==this.$store.state.solution || localStorage.getItem('currentGuessIndex')>=6) {
         return;
       }
     
@@ -141,12 +153,8 @@ export default {
         }
       }
       console.log("button", button);
-    },
-    removeAbout() {
-      this.aboutStatus = false
-      console.log("clicked")
-    }
-    
+    },    
+   
   }
 }
 </script>

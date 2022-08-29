@@ -62,7 +62,9 @@ export default {
                     
                     if (s == v) {
                         localStorage.setItem('lastSubmitted', s)
-                        this.$store.commit('checkWinner')
+                        let numberOfVictory = this.$store.state.numberOfVictory
+                        localStorage.setItem('numberOfVictory', parseInt(numberOfVictory)+1)
+                        this.$store.state.lastSubmitted = s
                         toast({
                             message: this.victoryMessage[this.$store.state.currentGuessIndex-1],
                             type: 'is-success is-light',
@@ -72,17 +74,8 @@ export default {
                             duration: 2000,
                             position: 'top-center',
                         })
-                        this.$store.commit('checkNumberOfGames')
-                        // let numberOfsequenceVictory = this.$store.state.sequenceVictory+1
-                        // localStorage.setItem("numberOfsequenceVictory", numberOfsequenceVictory)
-                        
-                        // if (numberOfsequenceVictory > this.$store.state.sequenceVictoryRecord) {
-                        //     this.$store.state.sequenceVictoryRecord = numberOfsequenceVictory
-                        //     localStorage.setItem("numberOfsequenceVictoryRecord", this.$store.state.sequenceVictoryRecord)
-                        // }
-
-
                     } else if (this.$store.state.currentGuessIndex >= 6) {
+                        localStorage.setItem('currentGuessIndex', this.$store.state.currentGuessIndex)
                         toast({
                             message: this.$store.state.solution,
                             type: 'is-dark is-light',
@@ -92,13 +85,11 @@ export default {
                             duration: 2000,
                             position: 'top-center',
                         })
-                        // this.$store.state.sequenceVictory = 0
-                        // localStorage.setItem("numberOfsequenceVictory", this.$store.state.sequenceVictory)
-                        this.$store.commit('checkNumberOfGames')
-                        this.$store.commit('checkWinner')
+                        
                     }
-                    
-                    
+                    this.$store.commit('checkWinner')
+                    this.$store.commit('checkNumberOfGames')
+                                       
                 }
             }
         },
