@@ -4,7 +4,7 @@
         <div class="">
             <div class="card info pb-5">
             <section class="card-body">
-            <p class="card-title pt-4 has-text-centered subtitle is-family-secondary is-size-4">HISOBOTLAR</p>
+            <p class="card-title pt-4 has-text-centered subtitle is-family-secondary is-size-4">ҲИСОБОТЛАР</p>
             <div class="columns px-4 py-3 is-flex">
                 <div class="column px-4">
                 <p class="has-text-centered is-size-3">{{this.$store.state.numberOfGames}}</p>

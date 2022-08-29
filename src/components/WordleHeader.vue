@@ -1,5 +1,5 @@
 <template>
-    <div class="title pt-5 pb-2 is-size-6-mobile"><span class="animate__animated animate__bounce">WORDLE</span></div>
+    <div class="title pt-5 pb-2 is-size-6-mobile"><span class="animate__animated animate__bounce">@WORDLEUZBOT</span></div>
 </template>
 
 <script>
@@ -23,5 +23,4 @@ export default {
         text-align: center;
         border-bottom: 1px solid #d3d6da;
     }
-
 </style>

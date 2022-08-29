@@ -4,7 +4,7 @@
             <div class="modal-background"></div>
             <div class="modal-content">
                 <p class="image is-4by3">
-                <img v-bind:src="'https://cp.wordlebot.uz'+ads.image">
+                <a v-bind:href=ads.link target="blank"><img v-bind:src="'https://cp.wordlebot.uz'+ads.image"></a>
                 </p>
             </div>
             <button class="modal-close is-large" @click="switchModal"  aria-label="close"></button>
@@ -33,8 +33,6 @@ import axios from 'axios';
                     .get('api/v1/ads/')
                     .then(response => {
                         this.ads = response.data[0]
-                        // console.log(response.data)
-                        // console.log(this.ads.get_image)
                     })
                     .catch(error => {
                         console.log(error)

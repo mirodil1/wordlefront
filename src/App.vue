@@ -34,12 +34,12 @@
 
 <script>
 // import axios from 'axios';
-import Header from './components/Header.vue';
+import Header from './components/WordleHeader.vue';
 import WordRow from './components/WordRow.vue';
 import KeyBoard from './components/KeyBoard.vue';
-import About from './components/About.vue'
+import About from './components/WordleAbout.vue'
 import GameStatistic from './components/GameStatistic.vue'
-import Ads from './components/Ads.vue';
+import Ads from './components/WordleAds.vue';
 import { toast } from 'bulma-toast'
 
 export default {
@@ -100,12 +100,12 @@ export default {
           // console.log("else")
           localStorage.setItem("today", day)
       }
-      console.log(day)
+      // console.log(day)
       while (day > this.$store.state.words_list.length) {
         day -= this.$store.state.words_list.length
-        console.log(day)
+        // console.log(day)
       }
-      console.log(this.$store.state.words_list[day])
+      // console.log(this.$store.state.words_list[day])
       this.$store.state.solution = this.$store.state.words_list[day]
       return this.$store.state.words_list[day]
     },
@@ -139,7 +139,7 @@ export default {
                 dismissible: false,
                 animate: { in: 'shakeX'},
                 pauseOnHover: false,
-                duration: 1500,
+                duration: 2000,
                 position: 'top-center',
             })
           }
@@ -152,7 +152,7 @@ export default {
           guesses[currentGuessIndex] += button;
         }
       }
-      console.log("button", button);
+      // console.log("button", button);
     },    
    
   }
