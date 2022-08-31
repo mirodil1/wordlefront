@@ -1,5 +1,5 @@
 <template>
-    <div class="modal p-6 animate__animated animate__fadeIn" v-bind:class="{'is-active': this.$store.state.isWinner}">
+    <div class="modal p-6 animate__animated animate__fadeIn" v-bind:class="{'is-active': this.$store.state.isFinished}">
         <div class="modal-background"></div>
         <div class="">
             <div class="card info pb-5">

@@ -89,7 +89,7 @@ export default {
           console.log("somethong")
           if (localStorage.getItem("lastSubmitted")!=this.$store.state.solution || parseInt(localStorage.getItem("currentGuessIndex"))>=6)  {
             localStorage.setItem("currentGuessIndex", 0)
-            this.$store.state.isWinner = false
+            this.$store.state.isFinished = false
             localStorage.setItem("today", day)
           }
         } else {

@@ -62,6 +62,7 @@ export default {
                     
                     if (s == v) {
                         localStorage.setItem('lastSubmitted', s)
+                        this.$store.commit('setIsWinner', true)
                         let numberOfVictory = this.$store.state.numberOfVictory
                         localStorage.setItem('numberOfVictory', parseInt(numberOfVictory)+1)
                         this.$store.state.lastSubmitted = s

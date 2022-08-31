@@ -13,6 +13,7 @@ export default createStore({
     },
     lastSubmitted: "",
     isWinner: null,
+    isFinished: null,
     sequenceVictory: 0,
     sequenceVictoryRecord: 0,
     numberOfGames: 0,
@@ -46,23 +47,25 @@ export default createStore({
     },
     checkWinner(state) {
       if (localStorage.getItem('lastSubmitted')==state.solution || parseInt(localStorage.getItem('currentGuessIndex'))>=6) {
-        state.isWinner = true
+        state.isFinished = true
       }
     },
     setIsWinner(state, status) {
       state.isWinner = status
+      console.log(state.isWinner)
     },
     checkNumberOfGames(state) {
       if (localStorage.getItem("NumberOfGames") === null) {
-          localStorage.setItem("NumberOfGames", 1)
+          localStorage.setItem("NumberOfGames", 0)
           state.numberOfGames = localStorage.getItem("NumberOfGames")
-      } else if (state.currentGuessIndex >= 6 || state.isWinner) {
-          let counter = localStorage.getItem("NumberOfGames");
+      } 
+      if (state.currentGuessIndex >= 6 || state.isWinner) {
+          let counter = localStorage.getItem("NumberOfGames")
           localStorage.setItem("NumberOfGames", parseInt(counter)+1)
           state.numberOfGames = parseInt(localStorage.getItem("NumberOfGames"))
       }
 
-      if (localStorage.getItem("numberOfsequenceVictory") && state.isWinner) {
+      if (localStorage.getItem("numberOfsequenceVictory")) {
         if (state.lastSubmitted == state.solution) {
           let numberOfsequenceVictory = localStorage.getItem("numberOfsequenceVictory")
           console.log(numberOfsequenceVictory)
@@ -77,6 +80,9 @@ export default createStore({
       } else if (state.isWinner) {
         localStorage.setItem("numberOfsequenceVictory", 1)
         state.sequenceVictory = parseInt(localStorage.getItem("numberOfsequenceVictory"))
+      } else if (!state.isWinner) {
+        localStorage.setItem("numberOfsequenceVictory", 0)
+        state.sequenceVictory = parseInt(localStorage.getItem("numberOfsequenceVictory"))
       }
 
       if (localStorage.getItem("numberOfsequenceVictoryRecord")) {
@@ -89,11 +95,15 @@ export default createStore({
       } else if (state.isWinner) {
         localStorage.setItem("numberOfsequenceVictoryRecord", 1)
         state.sequenceVictoryRecord = parseInt(localStorage.getItem("numberOfsequenceVictoryRecord"))
+      } else if (!state.isWinner) {
+        localStorage.setItem("numberOfsequenceVictoryRecord", 0)
+        state.sequenceVictoryRecord = parseInt(localStorage.getItem("numberOfsequenceVictoryRecord"))
       }
 
       if (localStorage.getItem("numberOfVictory")) {
         console.log(localStorage.getItem("numberOfVictory"))
         state.numberOfVictory = localStorage.getItem("numberOfVictory")
+        console.log(state.numberOfGames)
         state.victoryPercentage = Math.round(state.numberOfVictory * 100 / state.numberOfGames)
         localStorage.setItem("victoryPercentage", state.victoryPercentage)
       }

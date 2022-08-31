@@ -10,7 +10,6 @@
             <button class="modal-close is-large" @click="switchModal"  aria-label="close"></button>
         </div>
     </div>
-
 </template>
 
 <script>
@@ -42,7 +41,6 @@ import axios from 'axios';
                 if (!localStorage.getItem('newUser')) {
                     localStorage.setItem('newUser', false)
                     this.$store.state.aboutStatus = true
-                    console.log(true)
                 } else {
                     this.$store.state.aboutStatus = false
                 }
