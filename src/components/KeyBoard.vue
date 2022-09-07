@@ -1,6 +1,6 @@
 <template>
   <div>
-    <div :class="keyboardClass"></div>
+    <div class="simple-keyboard"></div>
   </div>
 </template>
 
@@ -28,15 +28,26 @@ export default {
   
   mounted() {
      this.keyboard = new Keyboard(this.keyboardClass, {
+      // theme: "hg-theme-default hg-layout-default myTheme",
       layout: {
         'default': [
           
-          "Ё Й Ц У К Е Н Г Ш Ў З Х Ъ",
+          "Q Ё Й Ц У К Е Н Г Ш Ў З Х Ъ",
           'Ф Қ В А П Р О Л Д Ж Э',
           'Я Ч С М И Т Ь Б Ю Ғ Ҳ {bksp}',
           "{enter}",
         ]
       },
+      buttonTheme: [
+        {
+          class: "hg-red",
+          buttons: "Q Я Ч С М И Т Ь Б Ю Ғ Ҳ"
+        },
+        {
+          class: "hg-highlight",
+          buttons: "Q Ф Қ В А П Р О"
+        }
+      ],
       display: {
         '{bksp}': '⌫',
         '{enter}': 'Текшириш'
@@ -50,12 +61,16 @@ export default {
     guessedLetters: {
       handler(guessedLetters) {
         console.log("keyboard")
+        // this.keyboard.addButtonTheme(
+        //   guessedLetters.miss.join(" "), 
+        //   "is-dark"
+        // );
         this.keyboard.addButtonTheme(
-          guessedLetters.miss.join(" "), 
+          guessedLetters.miss.map(name => name.toUpperCase()).join(" "),
           "is-dark"
         );
         console.log(this.keyboard)
-        // console.log(guessedLetters.found.map(name => name.toUpperCase()).join(","), "found");
+        console.log(guessedLetters.found.map(name => name.toUpperCase()).join(","), "found");
         this.keyboard.addButtonTheme(
           guessedLetters.found.map(name => name.toUpperCase()).join(" "),
           "is-primary"
@@ -63,7 +78,7 @@ export default {
         // console.log(guessedLetters.found.join(" "),
         //   "is-warning")
         this.keyboard.addButtonTheme(
-          guessedLetters.found.join(" "),
+          guessedLetters.hint.join(" "),
           "is-warning"
         );
       },
@@ -76,7 +91,7 @@ export default {
     },
     onKeyPress(button) {
       this.$emit("onKeyPress", button.toLowerCase());
-      console.log(this.keyboard.addButtonTheme())
+      console.log(this.keyboard.buttonTheme, this.guessedLetters)
     }
   }
 }
@@ -84,7 +99,21 @@ export default {
 
 <!-- Add "scoped" attribute to limit CSS to this component only -->
 <style scoped>
-  .border {
+  .simple-keyboard.hg-theme-default.myTheme {
+    border: 1px solid rgba(45, 30, 80, 0.7);
+    border-radius: 10px;
+    margin: 10px;
+    width: calc(100% - 20px);
+  }
+  .simple-keyboard.hg-layout-default .hg-button.hg-red {
+    background: rgba(0, 247, 49, 0.7);
+    color: white;
+  }
+  .simple-keyboard.hg-layout-default .hg-button.hg-highlight {
+    box-shadow: 0px 0px 40px 5px rgba(255, 136, 0, 0.5);
+    z-index: 1;
+  }
+  /* .border {
     border: 1px solid red;
   }
   #div.found {
@@ -92,9 +121,6 @@ export default {
   }
   .hint {
     background-color: yellow !important;
-  }
-  .hg-red {
-    background-color: red;
-  }
+  } */
   
 </style>
