@@ -32,7 +32,7 @@ export default {
       layout: {
         'default': [
           
-          "Q Ё Й Ц У К Е Н Г Ш Ў З Х Ъ",
+          "Ё Й Ц У К Е Н Г Ш Ў З Х Ъ",
           'Ф Қ В А П Р О Л Д Ж Э',
           'Я Ч С М И Т Ь Б Ю Ғ Ҳ {bksp}',
           "{enter}",
@@ -41,11 +41,11 @@ export default {
       buttonTheme: [
         {
           class: "hg-red",
-          buttons: "Q Я Ч С М И Т Ь Б Ю Ғ Ҳ"
+          buttons: "Я Ч С М И Т Ь Б Ю Ғ Ҳ"
         },
         {
           class: "hg-highlight",
-          buttons: "Q Ф Қ В А П Р О"
+          buttons: "Ф Қ В А П Р О"
         }
       ],
       display: {
@@ -92,6 +92,7 @@ export default {
     onKeyPress(button) {
       this.$emit("onKeyPress", button.toLowerCase());
       console.log(this.keyboard.buttonTheme, this.guessedLetters)
+      this.keyboard.addButtonTheme('Е', 'is-primary');
     }
   }
 }
