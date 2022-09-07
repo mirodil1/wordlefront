@@ -3,7 +3,7 @@
         <div class="modal" :class="{'is-active': isActive}">
             <div class="modal-background"></div>
             <div class="modal-content">
-                <p class="image is-4by3">
+                <p class="image">
                 <a v-bind:href=ads.link target="blank"><img v-bind:src="'https://cp.wordlebot.uz'+ads.image"></a>
                 </p>
             </div>

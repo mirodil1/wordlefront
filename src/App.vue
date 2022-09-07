@@ -84,28 +84,21 @@ export default {
 
       let day = Math.floor(diff / (1000 * 60 * 60 * 24))
       if (localStorage.getItem("today")) {
-        // console.log("today")
         if (parseInt(localStorage.getItem("today")) < day) {
-          console.log("somethong")
           if (localStorage.getItem("lastSubmitted")!=this.$store.state.solution || parseInt(localStorage.getItem("currentGuessIndex"))>=6)  {
             localStorage.setItem("currentGuessIndex", 0)
             this.$store.state.isFinished = false
             localStorage.setItem("today", day)
           }
         } else {
-            // console.log("else")
             localStorage.setItem("today", day)
           } 
       }  else {
-          // console.log("else")
           localStorage.setItem("today", day)
       }
-      // console.log(day)
       while (day > this.$store.state.words_list.length) {
         day -= this.$store.state.words_list.length
-        // console.log(day)
       }
-      // console.log(this.$store.state.words_list[day])
       this.$store.state.solution = this.$store.state.words_list[day]
       return this.$store.state.words_list[day]
     },
@@ -118,7 +111,6 @@ export default {
       }
     
       if (button == "{enter}") {
-        console.log(this.$store.state.guesses[currentGuessIndex])
         if (currentGuess.length == 5) {
           if (this.$store.state.words_list.includes(this.$store.state.guesses[currentGuessIndex])) {
             this.$store.state.currentGuessIndex++;

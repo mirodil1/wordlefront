@@ -49,14 +49,12 @@ export default {
                     }
                     for (let i = 0; i < 5; i++) {
                         if (temp[i] == "gray") {
-                            console.log(temp[i])
                             if (letterPool.indexOf(v.charAt(i)) != -1) {
                                 letterPool.splice(letterPool.indexOf(v.charAt(i)), 1);
                                 temp[i] = "yellow";
                             }
                         }
                         this.colors[i]= temp[i];
-                        // console.log(this.colors[i])
                         await new Promise((resolve) => setTimeout(resolve, 500));
                     }
                     

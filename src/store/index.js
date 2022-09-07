@@ -101,9 +101,7 @@ export default createStore({
       }
 
       if (localStorage.getItem("numberOfVictory")) {
-        console.log(localStorage.getItem("numberOfVictory"))
         state.numberOfVictory = localStorage.getItem("numberOfVictory")
-        console.log(state.numberOfGames)
         state.victoryPercentage = Math.round(state.numberOfVictory * 100 / state.numberOfGames)
         localStorage.setItem("victoryPercentage", state.victoryPercentage)
       }

@@ -28,7 +28,6 @@ export default {
   
   mounted() {
      this.keyboard = new Keyboard(this.keyboardClass, {
-      // theme: "hg-theme-default hg-layout-default myTheme",
       layout: {
         'default': [
           
@@ -38,16 +37,6 @@ export default {
           "{enter}",
         ]
       },
-      buttonTheme: [
-        {
-          class: "hg-red",
-          buttons: "Я Ч С М И Т Ь Б Ю Ғ Ҳ"
-        },
-        {
-          class: "hg-highlight",
-          buttons: "Ф Қ В А П Р О"
-        }
-      ],
       display: {
         '{bksp}': '⌫',
         '{enter}': 'Текшириш'
@@ -60,26 +49,18 @@ export default {
   watch: {
     guessedLetters: {
       handler(guessedLetters) {
-        console.log("keyboard")
-        // this.keyboard.addButtonTheme(
-        //   guessedLetters.miss.join(" "), 
-        //   "is-dark"
-        // );
+        console.log(guessedLetters)
         this.keyboard.addButtonTheme(
           guessedLetters.miss.map(name => name.toUpperCase()).join(" "),
-          "is-dark"
+          "is-dark animate__animated animate__fadeIn"
         );
-        console.log(this.keyboard)
-        console.log(guessedLetters.found.map(name => name.toUpperCase()).join(","), "found");
         this.keyboard.addButtonTheme(
           guessedLetters.found.map(name => name.toUpperCase()).join(" "),
-          "is-primary"
+          "is-success animate__animated animate__fadeIn"
         );
-        // console.log(guessedLetters.found.join(" "),
-        //   "is-warning")
         this.keyboard.addButtonTheme(
-          guessedLetters.hint.join(" "),
-          "is-warning"
+          guessedLetters.hint.map(name => name.toUpperCase()).join(" "),
+          "is-warning animate__animated animate__fadeIn"
         );
       },
     deep: true
@@ -91,37 +72,23 @@ export default {
     },
     onKeyPress(button) {
       this.$emit("onKeyPress", button.toLowerCase());
-      console.log(this.keyboard.buttonTheme, this.guessedLetters)
-      this.keyboard.addButtonTheme('Е', 'is-primary');
     }
   }
 }
 </script>
 
 <!-- Add "scoped" attribute to limit CSS to this component only -->
-<style scoped>
-  .simple-keyboard.hg-theme-default.myTheme {
-    border: 1px solid rgba(45, 30, 80, 0.7);
-    border-radius: 10px;
-    margin: 10px;
-    width: calc(100% - 20px);
-  }
-  .simple-keyboard.hg-layout-default .hg-button.hg-red {
-    background: rgba(0, 247, 49, 0.7);
+<style>
+  .simple-keyboard.hg-layout-default .hg-button.is-warning {
+    background: hsl(48, 100%, 67%);
     color: white;
   }
-  .simple-keyboard.hg-layout-default .hg-button.hg-highlight {
-    box-shadow: 0px 0px 40px 5px rgba(255, 136, 0, 0.5);
-    z-index: 1;
+  .simple-keyboard.hg-layout-default .hg-button.is-dark {
+    background: hsl(0, 0%, 71%);
+    color: white;
   }
-  /* .border {
-    border: 1px solid red;
+  .simple-keyboard.hg-layout-default .hg-button.is-success {
+    background: hsl(141, 53%, 53%);
+    color: white;
   }
-  #div.found {
-    background-color: green !important;
-  }
-  .hint {
-    background-color: yellow !important;
-  } */
-  
 </style>
