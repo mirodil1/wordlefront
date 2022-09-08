@@ -29,9 +29,9 @@ import axios from 'axios';
         methods: {
             async getAds() {
                 await axios
-                    .get('api/v1/ads/')
+                    .get('api/v1/ads/1')
                     .then(response => {
-                        this.ads = response.data[0]
+                        this.ads = response.data
                     })
                     .catch(error => {
                         console.log(error)
