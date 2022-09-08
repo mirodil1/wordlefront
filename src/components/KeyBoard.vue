@@ -28,9 +28,9 @@ export default {
   
   mounted() {
      this.keyboard = new Keyboard(this.keyboardClass, {
+      theme: "hg-theme-default hg-layout-default myTheme",
       layout: {
         'default': [
-          
           "Ё Й Ц У К Е Н Г Ш Ў З Х Ъ",
           'Ф Қ В А П Р О Л Д Ж Э',
           'Я Ч С М И Т Ь Б Ю Ғ Ҳ {bksp}',
@@ -41,6 +41,12 @@ export default {
         '{bksp}': '⌫',
         '{enter}': 'Текшириш'
       },
+      buttonTheme: [
+        {
+          class: "key-bg",
+          buttons: "Ё Й Ц У К Е Н Г Ш Ў З Х Ъ Ф Қ В А П Р О Л Д Ж Э Я Ч С М И Т Ь Б Ю Ғ Ҳ {bksp} {enter}",
+        },
+      ],
       onChange: this.onChange,
       onKeyPress: this.onKeyPress
     });
@@ -79,16 +85,36 @@ export default {
 
 <!-- Add "scoped" attribute to limit CSS to this component only -->
 <style>
+  .simple-keyboard.hg-theme-default.myTheme {
+      background: #fff;
+      margin-top: 20px;
+  }
+
+    .simple-keyboard.hg-layout-default .hg-button.key-bg{
+      background: #d3d6da;
+      font-weight: bold;
+    }
+
   .simple-keyboard.hg-layout-default .hg-button.is-warning {
-    background: hsl(48, 100%, 67%);
+    background: #c9b458;
     color: white;
   }
   .simple-keyboard.hg-layout-default .hg-button.is-dark {
-    background: hsl(0, 0%, 71%);
+    background: #787c7e;
     color: white;
   }
   .simple-keyboard.hg-layout-default .hg-button.is-success {
-    background: hsl(141, 53%, 53%);
+    background: #6aaa64;
     color: white;
   }
+
+  @media only screen and (min-width: 320px) 
+                       and (max-width: 375px){
+    .simple-keyboard.hg-theme-default.myTheme {
+      background: #fff;
+      margin-top: 0
+    }
+
+  }
+
 </style>

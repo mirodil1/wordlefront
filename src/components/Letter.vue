@@ -1,6 +1,6 @@
 <template>
     <div 
-        class="letter-border has-text-centered m-1 has-text-weight-bold "
+        class="letter-border has-text-centered has-text-weight-bold "
         :class="{
             'has-background-grey-light has-text-white animate__animated animate__flipInX'
              : color == 'gray',
@@ -38,6 +38,16 @@ export default {
 </script>
 
 <style scoped>
+
+    .has-background-warning {
+        background: #c9b458 !important;
+    }
+    .has-background-grey-light {
+        background: #787c7e !important;
+    }
+    .has-background-success {
+        background: #6aaa64 !important;
+    }
     .letter-border {
         width: 60px;
         height: 60px;
@@ -46,6 +56,7 @@ export default {
         border: 2px solid #d3d6da;
         box-sizing: border-box;
         text-transform: uppercase;
+        margin: 2px;
     }
     @media only screen and (max-width: 500px) {
         .letter-border {

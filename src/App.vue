@@ -1,13 +1,12 @@
 <template>
-
   <div class="wrapper">
     <Ads
     />
     <Header/>
     <About
     />
-    <div class="columns is-centered is-vcentered pt-2">
-      <div class="px-5 py-5 is-5-tablet is-12-mobile">
+    <div class="columns is-centered is-vcentered ">
+      <div class="is-5-tablet is-12-mobile">
         <WordRow
           v-for="(guess, i) in this.$store.state.guesses"
           :key="i"
@@ -20,7 +19,7 @@
     <div class="column">
       <GameStatistic/>
     </div>
-    <div class="columns px-1 is-centered is-vcentered">
+    <div class="columns is-centered is-vcentered is-flex">
       <div class="column is-5-desktop is-12-mobile is-8-tablet">
          <KeyBoard
           @keypress="onKeyPress"
@@ -153,6 +152,14 @@ export default {
 
 <style>
 @import '~bulma/css/bulma.css';
+
+  body {
+    max-height: 50px;
+  }
+
+  .pg-height {
+    max-height: 350px;
+  }
 
   .info {
     width: 370px;
