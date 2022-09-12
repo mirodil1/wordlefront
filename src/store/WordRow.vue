@@ -60,15 +60,13 @@ export default {
                                 temp[i] = "yellow";
                             }
                         }
-                        // this.colors[i]= temp[i];
-                        this.$store.state.colorList[this.$store.state.currentGuessIndex-1][i] = temp[i]
+                        this.colors[i]= temp[i];
                         await new Promise((resolve) => setTimeout(resolve, 500));
                     }
 
-                    // this.$store.state.colorList[this.$store.state.currentGuessIndex-1] = temp
+                    this.$store.state.colorList[this.$store.state.currentGuessIndex-1] = temp
                     console.log(this.$store.state.colorList)
                     localStorage.setItem("color", JSON.stringify(this.$store.state.colorList))
-
                     if (s == v) {
                         localStorage.setItem('lastSubmitted', s)
                         this.$store.commit('setIsWinner', true)

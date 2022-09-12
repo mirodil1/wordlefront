@@ -46,6 +46,22 @@ export default {
           class: "key-bg",
           buttons: "Ё Й Ц У К Е Н Г Ш Ў З Х Ъ Ф Қ В А П Р О Л Д Ж Э Я Ч С М И Т Ь Б Ю Ғ Ҳ {bksp} {enter}",
         },
+        {
+          class: "is-success",
+          buttons: "{enter}",
+        },
+        {
+          class: "df-dark",
+          buttons: JSON.parse(localStorage.getItem("guessedLetters")).miss.length > 0 ? JSON.parse(localStorage.getItem("guessedLetters")).miss.map(name => name.toUpperCase()).join(" ") : 'q'
+        },
+        {
+          class: "df-success",
+          buttons: JSON.parse(localStorage.getItem("guessedLetters")).miss.length > 0 ? JSON.parse(localStorage.getItem("guessedLetters")).found.map(name => name.toUpperCase()).join(" ") : 'q'
+        },
+        {
+          class: "df-warning",
+          buttons: JSON.parse(localStorage.getItem("guessedLetters")).miss.length > 0 ? JSON.parse(localStorage.getItem("guessedLetters")).hint.map(name => name.toUpperCase()).join(" ") : 'q'
+        }
       ],
       onChange: this.onChange,
       onKeyPress: this.onKeyPress
@@ -90,20 +106,33 @@ export default {
       margin-top: 20px;
   }
 
-    .simple-keyboard.hg-layout-default .hg-button.key-bg{
+  .simple-keyboard.hg-layout-default .hg-button.key-bg{
       background: #d3d6da;
       font-weight: bold;
     }
 
   .simple-keyboard.hg-layout-default .hg-button.is-warning {
-    background: #c9b458;
+    background: #c9b458 !important;
     color: white;
   }
   .simple-keyboard.hg-layout-default .hg-button.is-dark {
-    background: #787c7e;
+    background: #787c7e !important;
     color: white;
   }
   .simple-keyboard.hg-layout-default .hg-button.is-success {
+    background: #6aaa64 !important;
+    color: white;
+  }
+
+  .simple-keyboard.hg-layout-default .hg-button.df-warning {
+    background: #c9b458;
+    color: white;
+  }
+  .simple-keyboard.hg-layout-default .hg-button.df-dark {
+    background: #787c7e;
+    color: white;
+  }
+  .simple-keyboard.hg-layout-default .hg-button.df-success {
     background: #6aaa64;
     color: white;
   }

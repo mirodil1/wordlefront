@@ -4,7 +4,9 @@
         <div class="">
             <div class="card info pb-5">
             <section class="card-body">
+            <button class="delete is-pulled-right m-1" @click="removeStat" aria-label="close"></button>
             <p class="card-title pt-4 has-text-centered subtitle is-family-secondary is-size-4">ҲИСОБОТЛАР</p>
+            
             <div class="columns px-4 py-3 is-flex">
                 <div class="column px-4">
                 <p class="has-text-centered is-size-3">{{this.$store.state.numberOfGames}}</p>
@@ -44,11 +46,15 @@ export default {
     name: "GameStatistic",
     data() {
        return {
+
        } 
     },
     mounted() {
     },
     methods: {
+        removeStat() {
+          this.$store.state.isFinished = false
+        },
         copyToClipBoard(){
             let textToCopy = "https://t.me/gamewordlebot"
             navigator.clipboard.writeText(textToCopy);    
@@ -62,6 +68,7 @@ export default {
                 position: 'top-center',
             })
         }
+
         // timer() {
         //     var countDownDate = new Date("Aug 23, 2022 14:36:00 GMT-09:00").getTime() + new Date().getTime();
         //     // Update the count down every 1 second
@@ -94,3 +101,10 @@ export default {
 
 }
 </script>
+
+<style scoped>
+    .modal-background {
+        opacity: 0.3 !important;
+
+    }
+</style>

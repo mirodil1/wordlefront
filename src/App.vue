@@ -13,6 +13,7 @@
           :value="guess"
           :solution="this.$store.state.solution"
           :submitted="i < this.$store.state.currentGuessIndex"
+          :temp_colors="this.$store.state.colorList[i]"
         />
       </div>
     </div>
@@ -54,11 +55,17 @@ export default {
   data() {
     return {
       input: "",
+      guessedLetters: {
+        miss: [],
+        found: [],
+        hint: []
+      },
     }
   },
   beforeMount() {
     // this.$store.commit('checkWinner')
     this.$store.commit("initializeValue")
+    console.log(JSON.parse(localStorage.getItem("guessedLetters")))
   },
   mounted() {
     this.getWords()
@@ -80,18 +87,20 @@ export default {
       const start = new Date(2022, 7, 29)
       const diff = Number(now) - Number(start)
 
-
-      let day = Math.floor(diff / (1000 * 60 * 60 * 24))
+      let day = Math.floor(diff / (1000 * 60 * 60 * 21))
       if (localStorage.getItem("today")) {
         if (parseInt(localStorage.getItem("today")) < day) {
           if (localStorage.getItem("lastSubmitted")!=this.$store.state.solution || parseInt(localStorage.getItem("currentGuessIndex"))>=6)  {
             localStorage.setItem("currentGuessIndex", 0)
+            localStorage.setItem("guesses", JSON.stringify(["", "", "", "", "", ""]));
+            localStorage.setItem("color", JSON.stringify([["", "", "", "", ""], ["", "", "", "", ""], ["", "", "", "", ""], ["", "", "", "", ""], ["", "", "", "", ""], ["", "", "", "", ""]]));
+            localStorage.setItem("guessedLetters", JSON.stringify(this.guessedLetters));
             this.$store.state.isFinished = false
             localStorage.setItem("today", day)
           }
         } else {
             localStorage.setItem("today", day)
-          } 
+          }
       }  else {
           localStorage.setItem("today", day)
       }
@@ -108,11 +117,11 @@ export default {
       if (currentGuessIndex >= 6 || localStorage.getItem('lastSubmitted')==this.$store.state.solution || localStorage.getItem('currentGuessIndex')>=6) {
         return;
       }
-    
       if (button == "{enter}") {
         if (currentGuess.length == 5) {
           if (this.$store.state.words_list.includes(this.$store.state.guesses[currentGuessIndex])) {
             this.$store.state.currentGuessIndex++;
+            localStorage.setItem('currentGuessIndex', parseInt(this.$store.state.currentGuessIndex))
             for (var i = 0; i < currentGuess.length; i ++) {
               let c = currentGuess.charAt(i);
               if (c == this.$store.state.solution.charAt(i)) {
@@ -123,6 +132,8 @@ export default {
                 this.$store.state.guessedLetters.miss.push(c);
               }
             }
+            localStorage.setItem('guessedLetters', JSON.stringify(this.$store.state.guessedLetters))
+            console.log(JSON.parse(localStorage.getItem("guessedLetters")))
           } else {
             toast({
                 message: "Бундай сўз рўйхатда мавжуд эмас",
@@ -154,7 +165,7 @@ export default {
 @import '~bulma/css/bulma.css';
 
   body {
-    max-height: 50px;
+    max-height: 100%;
   }
 
   .pg-height {

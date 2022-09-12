@@ -11,6 +11,7 @@ export default createStore({
       found: [],
       hint: []
     },
+    colorList: [["", "", "", "", ""], ["", "", "", "", ""], ["", "", "", "", ""], ["", "", "", "", ""], ["", "", "", "", ""], ["", "", "", "", ""]],
     lastSubmitted: "",
     isWinner: null,
     isFinished: null,
@@ -25,6 +26,30 @@ export default createStore({
   },
   mutations: {
     initializeValue(state) {
+      if (localStorage.getItem("guessedLetters")) {
+        state.guessedLetters = JSON.parse(localStorage.getItem("guessedLetters"));
+      } else {
+        localStorage.setItem("guessedLetters", JSON.stringify(state.guessedLetters));
+      }
+
+      if (localStorage.getItem("color")) {
+        state.colorList = JSON.parse(localStorage.getItem("color"));
+      } else {
+        localStorage.setItem("color", JSON.stringify(state.colorList));
+      }
+
+      if (localStorage.getItem("currentGuessIndex")) {
+        state.currentGuessIndex = parseInt(localStorage.getItem("currentGuessIndex"));
+      } else {
+        localStorage.setItem("currentGuessIndex", parseInt(state.currentGuessIndex));
+      }
+
+      // console.log(localStorage.getItem("currentGuessIndex"))
+      if (localStorage.getItem("guesses")) {
+        state.guesses = JSON.parse(localStorage.getItem("guesses"));
+      } else {
+        localStorage.setItem("guesses", JSON.stringify(state.guesses));
+      }
       if (localStorage.getItem('NumberOfGames')) {
         state.numberOfGames = parseInt(localStorage.getItem("NumberOfGames"))
       }
@@ -58,7 +83,7 @@ export default createStore({
       if (localStorage.getItem("NumberOfGames") === null) {
           localStorage.setItem("NumberOfGames", 0)
           state.numberOfGames = localStorage.getItem("NumberOfGames")
-      } 
+      }
       if (state.currentGuessIndex >= 6 || state.isWinner) {
           let counter = localStorage.getItem("NumberOfGames")
           localStorage.setItem("NumberOfGames", parseInt(counter)+1)

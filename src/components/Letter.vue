@@ -10,15 +10,27 @@
              : color == 'yellow',
             //  'animate__animated animate__shakeX'
             //  : checked == true
+            // 'has-background-grey-light has-text-white animate__animated animate__flipInX'
+            //  : temp_color == 'gray',
+            // 'has-background-success	has-text-white animate__animated animate__flipInX'
+            //  : temp_color == 'green',
+            //  'has-background-warning has-text-white animate__animated animate__flipInX'
+            //  : temp_color == 'yellow',
         }"
     >
         {{letter}}
+        {{l}}
     </div>
 </template>
 
 <script>
 export default {
     name: "Letter",
+    data() {
+        return {
+            l: ""
+        }
+    },
     props: {
         letter: {
             type: String,
@@ -28,6 +40,7 @@ export default {
             type: String,
             default: ""
         },
+        
     },
     // data() {
     //     return {
