@@ -64,8 +64,6 @@ export default {
                         this.$store.state.colorList[this.$store.state.currentGuessIndex-1][i] = temp[i]
                         await new Promise((resolve) => setTimeout(resolve, 500));
                     }
-
-                    // this.$store.state.colorList[this.$store.state.currentGuessIndex-1] = temp
                     console.log(this.$store.state.colorList)
                     localStorage.setItem("color", JSON.stringify(this.$store.state.colorList))
 
@@ -99,7 +97,6 @@ export default {
                     }
                     this.$store.commit('checkWinner')
                     this.$store.commit('checkNumberOfGames')
-                                       
                 }
             }
         },

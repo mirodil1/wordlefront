@@ -63,7 +63,7 @@ export default {
     }
   },
   beforeMount() {
-    // this.$store.commit('checkWinner')
+    this.$store.commit('checkWinner')
     this.$store.commit("initializeValue")
     console.log(JSON.parse(localStorage.getItem("guessedLetters")))
   },

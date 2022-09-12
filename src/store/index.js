@@ -71,10 +71,13 @@ export default createStore({
       }
     },
     checkWinner(state) {
-      if (localStorage.getItem('lastSubmitted')==state.solution || parseInt(localStorage.getItem('currentGuessIndex'))>=6) {
+      if (localStorage.getItem('lastSubmitted')==state.solution) {
+        state.isFinished = true
+        localStorage.setItem("isWinner", true)
+      } else if (parseInt(localStorage.getItem('currentGuessIndex'))>=6) {
         state.isFinished = true
       }
-    },
+    }, 
     setIsWinner(state, status) {
       state.isWinner = status
       console.log(state.isWinner)

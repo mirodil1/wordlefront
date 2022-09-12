@@ -53,12 +53,15 @@ export default {
     },
     methods: {
         share() {
-            navigator.share({
-                text: this.$store.state.isWinner ? `${localStorage.getItem('currentGuessIndex')}/6` : "x/6",
-                url: "https://t.me/WordleUzBot",
-                title: "WordleUzBot"
-            })
-            toast({
+            if (navigator.share) {
+                    navigator.share({
+                    text: localStorage.getItem("isWinner") ? `${localStorage.getItem('currentGuessIndex')}/6` : "x/6",
+                    url: "https://t.me/WordleUzBot",
+                    title: "WordleUzBot"
+                })
+            } else {
+                navigator.clipboard.writeText(localStorage.getItem("isWinner") ? `${localStorage.getItem('currentGuessIndex')}/6` : "x/6")
+                toast({
                 message: "Кўчирилди",
                 type: 'is-success is-light',
                 dismissible: false,
@@ -67,6 +70,9 @@ export default {
                 duration: 2000,
                 position: 'top-center',
             })
+            }
+            
+            
         },
         removeStat() {
           this.$store.state.isFinished = false
