@@ -30,7 +30,7 @@
                 <p id="demo" class="has-text-bold has-text-centered is-size-6">Янги сўз киритилишини кутинг</p>
                 </div>
                 <div class="column">
-                <button class="button is-primary has-text-centered is-centered" @click="copyToClipBoard">ULASHISH</button>
+                <button class="button is-primary has-text-centered is-centered" @click="share">ULASHISH</button>
                 </div>
             </div>
             </section>
@@ -52,6 +52,22 @@ export default {
     mounted() {
     },
     methods: {
+        share() {
+            navigator.share({
+                text: this.$store.state.isWinner ? `${localStorage.getItem('currentGuessIndex')}/6` : "x/6",
+                url: "https://t.me/WordleUzBot",
+                title: "WordleUzBot"
+            })
+            toast({
+                message: "Кўчирилди",
+                type: 'is-success is-light',
+                dismissible: false,
+                animate: { in: 'backInDown', out: 'backOutDown' },
+                pauseOnHover: false,
+                duration: 2000,
+                position: 'top-center',
+            })
+        },
         removeStat() {
           this.$store.state.isFinished = false
         },
