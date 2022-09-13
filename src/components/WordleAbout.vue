@@ -1,7 +1,7 @@
 <template>
     <div class="modal p-6 animate__animated"  :class="{'is-active animate__fadeIn': this.$store.state.aboutStatus}">
         <div class="modal-background"></div>
-            <div class="modal-card game-help p-3">
+            <div class="modal-card game-help">
                 <section class="modal-card-body">
                     <button class="delete is-pulled-right" @click="removeAbout" aria-label="close"></button>
                     <div class="instruction">
@@ -42,7 +42,6 @@
                         <p><strong>О</strong> ҳарфи СЎЗ ичида иштирок этмаган.</p>
                     </div>
                 </section>
-                
             </div>
     </div>
 </template>
@@ -72,9 +71,6 @@ export default {
     .instructions {
         font-size: 14px;
     }
-    /* .game-help {
-        max-width: 466px;
-    } */
     .examples {
         border-bottom: 1px solid ;
         border-top: 1px solid;

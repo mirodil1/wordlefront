@@ -8,18 +8,9 @@
              : color == 'green',
              'has-background-warning has-text-white animate__animated animate__flipInX'
              : color == 'yellow',
-            //  'animate__animated animate__shakeX'
-            //  : checked == true
-            // 'has-background-grey-light has-text-white animate__animated animate__flipInX'
-            //  : temp_color == 'gray',
-            // 'has-background-success	has-text-white animate__animated animate__flipInX'
-            //  : temp_color == 'green',
-            //  'has-background-warning has-text-white animate__animated animate__flipInX'
-            //  : temp_color == 'yellow',
         }"
     >
         {{letter}}
-        {{l}}
     </div>
 </template>
 
@@ -28,7 +19,6 @@ export default {
     name: "Letter",
     data() {
         return {
-            l: ""
         }
     },
     props: {
@@ -42,11 +32,6 @@ export default {
         },
         
     },
-    // data() {
-    //     return {
-    //         letter: "A"
-    //     }
-    // },
 }
 </script>
 
@@ -65,7 +50,6 @@ export default {
         width: 60px;
         height: 60px;
         font-size: 2rem;
-        /* line-height: 55px; */
         border: 2px solid #d3d6da;
         box-sizing: border-box;
         text-transform: uppercase;
@@ -81,14 +65,14 @@ export default {
         }
     }
     @media only screen and (min-width: 320px) 
-                       and (max-width: 375px){
+                       and (max-width: 359px){
         .letter-border {
-            width: 40px;
-            height: 40px;
-            box-sizing: border-box;
-            text-align: center;
-            line-height: 30px;
-            font-size: 25px;
+            width: 27.59px;
+            height: 27.59px;
+            /* box-sizing: border-box; */
+            line-height: 23px;
+            font-size: 20px;
+            /* text-align: center; */
         }
     }
 

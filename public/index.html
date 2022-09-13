@@ -4,6 +4,7 @@
     <meta charset="utf-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width,initial-scale=1.0">
+    <script src="https://telegram.org/js/telegram-web-app.js"></script>
     <link rel="icon" href="<%= BASE_URL %>icon.png">
     <link
       rel="stylesheet"
@@ -19,4 +20,9 @@
     <div id="app"></div>
     <!-- built files will be auto injected -->
   </body>
+  <script>
+    let tg = window.Telegram.WebApp;
+    console.log("HI", tg)
+    console.log(tg.expand())
+  </script>
 </html>

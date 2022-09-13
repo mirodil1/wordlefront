@@ -44,7 +44,6 @@ export default createStore({
         localStorage.setItem("currentGuessIndex", parseInt(state.currentGuessIndex));
       }
 
-      // console.log(localStorage.getItem("currentGuessIndex"))
       if (localStorage.getItem("guesses")) {
         state.guesses = JSON.parse(localStorage.getItem("guesses"));
       } else {

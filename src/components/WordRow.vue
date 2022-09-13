@@ -1,6 +1,6 @@
 <template>
     <div class="column">
-        <div class="columns is-flex is-centered " :class="{'animate__animated animate__shakeX': isActive}">
+        <div class="columns is-flex is-centered" :class="{'animate__animated animate__shakeX': isActive}">
             <Letter
                 v-for="i in 5"
                 :key="i"
@@ -33,9 +33,6 @@ export default {
     components: {
         Letter
     },
-    mounted() {
-        // this.color()
-    },
     watch: {
         submitted: {
             async handler(submitted) {
@@ -60,7 +57,6 @@ export default {
                                 temp[i] = "yellow";
                             }
                         }
-                        // this.colors[i]= temp[i];
                         this.$store.state.colorList[this.$store.state.currentGuessIndex-1][i] = temp[i]
                         await new Promise((resolve) => setTimeout(resolve, 500));
                     }
@@ -83,7 +79,6 @@ export default {
                             position: 'top-center',
                         })
                     } else if (this.$store.state.currentGuessIndex >= 6) {
-                        // localStorage.setItem('currentGuessIndex', this.$store.state.currentGuessIndex)
                         toast({
                             message: this.$store.state.solution,
                             type: 'is-dark is-light',
@@ -101,24 +96,5 @@ export default {
             }
         },
     },
-    methods: {
-        // color() {
-        //     if (localStorage.getItem("color")) {
-        //         for (let i = 0; i < JSON.parse(localStorage.getItem("color")).length; i++) {
-        //             console.log(JSON.parse(localStorage.getItem("color")).length)
-        //         }
-        //     }
-        // }
-    
-    }
-    
 }
 </script>
-
-<style scoped>
-
-.board{
-  width: 350px;
-  height: 420px;
-}
-</style>

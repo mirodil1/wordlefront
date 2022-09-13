@@ -1,7 +1,5 @@
 <template>
-  <div>
     <div class="simple-keyboard"></div>
-  </div>
 </template>
 
 <script>
@@ -103,7 +101,9 @@ export default {
 <style>
   .simple-keyboard.hg-theme-default.myTheme {
       background: #fff;
-      margin-top: 20px;
+      max-width: 540px;
+      position: fixed;
+      bottom: 0;
   }
 
   .simple-keyboard.hg-layout-default .hg-button.key-bg{
@@ -136,14 +136,4 @@ export default {
     background: #6aaa64;
     color: white;
   }
-
-  @media only screen and (min-width: 320px) 
-                       and (max-width: 375px){
-    .simple-keyboard.hg-theme-default.myTheme {
-      background: #fff;
-      margin-top: 0
-    }
-
-  }
-
 </style>

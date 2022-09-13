@@ -2,11 +2,10 @@
     <div class="modal p-6 animate__animated animate__fadeIn" v-bind:class="{'is-active': this.$store.state.isFinished}">
         <div class="modal-background"></div>
         <div class="">
-            <div class="card info pb-5">
-            <section class="card-body">
-            <button class="delete is-pulled-right m-1" @click="removeStat" aria-label="close"></button>
-            <p class="card-title pt-4 has-text-centered subtitle is-family-secondary is-size-4">ҲИСОБОТЛАР</p>
-            
+            <div class="modal-card info pb-5">
+            <section class="modal-card-body">
+            <button class="delete is-pulled-right" @click="removeStat" aria-label="close"></button>
+            <p class="card-title has-text-centered subtitle is-family-secondary is-size-4">СТАТИСТИКА</p>
             <div class="columns px-4 py-3 is-flex">
                 <div class="column px-4">
                 <p class="has-text-centered is-size-3">{{this.$store.state.numberOfGames}}</p>
@@ -30,7 +29,7 @@
                 <p id="demo" class="has-text-bold has-text-centered is-size-6">Янги сўз киритилишини кутинг</p>
                 </div>
                 <div class="column">
-                <button class="button is-primary has-text-centered is-centered" @click="share">ULASHISH</button>
+                <button class="button is-primary has-text-centered is-centered" @click="share">УЛАШИШ</button>
                 </div>
             </div>
             </section>
@@ -71,8 +70,6 @@ export default {
                 position: 'top-center',
             })
             }
-            
-            
         },
         removeStat() {
           this.$store.state.isFinished = false

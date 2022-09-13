@@ -4,7 +4,7 @@
             <div class="modal-background"></div>
             <div class="modal-content">
                 <p class="image">
-                <a v-bind:href=ads.link target="blank"><img v-bind:src="'https://cp.wordlebot.uz'+ads.image"></a>
+                    <a v-bind:href=ads.link target="blank"><img v-bind:src="'https://cp.wordlebot.uz'+ads.image"></a>
                 </p>
             </div>
             <button class="modal-close is-large" @click="switchModal"  aria-label="close"></button>
@@ -24,7 +24,6 @@ import axios from 'axios';
         },
         mounted() {
             this.getAds()
-            // this.switchModal()
         },
         methods: {
             async getAds() {

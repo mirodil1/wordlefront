@@ -5,8 +5,8 @@
     <Header/>
     <About
     />
-    <div class="columns is-centered is-vcentered ">
-      <div class="is-5-tablet is-12-mobile">
+    <div class="columns is-centered">
+      <div class="mt-6">
         <WordRow
           v-for="(guess, i) in this.$store.state.guesses"
           :key="i"
@@ -20,8 +20,8 @@
     <div class="column">
       <GameStatistic/>
     </div>
-    <div class="columns is-centered is-vcentered is-flex">
-      <div class="column is-5-desktop is-12-mobile is-8-tablet">
+    <div class="columns is-centered">
+      <div class="column is-4-desktop is-8-tablet">
          <KeyBoard
           @keypress="onKeyPress"
           @onKeyPress="onKeyPress"
@@ -33,7 +33,6 @@
 </template>
 
 <script>
-// import axios from 'axios';
 import Header from './components/WordleHeader.vue';
 import WordRow from './components/WordRow.vue';
 import KeyBoard from './components/KeyBoard.vue';
@@ -87,7 +86,7 @@ export default {
       const start = new Date(2022, 7, 29)
       const diff = Number(now) - Number(start)
 
-      let day = Math.floor(diff / (1000 * 60 * 60 * 21))
+      let day = Math.floor(diff / (1000 * 60 * 60 * 24))
       if (localStorage.getItem("today")) {
         if (parseInt(localStorage.getItem("today")) < day) {
           if (localStorage.getItem("lastSubmitted")!=this.$store.state.solution || parseInt(localStorage.getItem("currentGuessIndex"))>=6)  {
@@ -154,7 +153,6 @@ export default {
           guesses[currentGuessIndex] += button;
         }
       }
-      // console.log("button", button);
     },    
    
   }
@@ -163,15 +161,6 @@ export default {
 
 <style>
 @import '~bulma/css/bulma.css';
-
-  body {
-    max-height: 100%;
-  }
-
-  .pg-height {
-    max-height: 350px;
-  }
-
   .info {
     width: 370px;
 
@@ -186,7 +175,7 @@ export default {
     }
   }
   @media only screen and (min-width: 320px) 
-                       and (max-width: 375px){
+                       and (max-width: 360px){
     .info {
         width: 340px;
         /* box-sizing: border-box;
