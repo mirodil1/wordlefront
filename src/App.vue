@@ -5,7 +5,8 @@
     <Header/>
     <About
     />
-    <div class="columns is-centered">
+    <GameStatistic/>
+    <div class="">
       <div class="mt-6">
         <WordRow
           v-for="(guess, i) in this.$store.state.guesses"
@@ -16,12 +17,7 @@
           :temp_colors="this.$store.state.colorList[i]"
         />
       </div>
-    </div>
-    <div class="column">
-      <GameStatistic/>
-    </div>
-    <div class="columns is-centered">
-      <div class="column is-4-desktop is-8-tablet">
+      <div class="is-centered">
          <KeyBoard
           @keypress="onKeyPress"
           @onKeyPress="onKeyPress"
@@ -62,12 +58,12 @@ export default {
     }
   },
   beforeMount() {
-    this.$store.commit('checkWinner')
+    this.getWords()
     this.$store.commit("initializeValue")
     console.log(JSON.parse(localStorage.getItem("guessedLetters")))
   },
   mounted() {
-    this.getWords()
+    // this.getWords()
     window.addEventListener("keyup", (e) =>{
       e.preventDefault();
       let button =
@@ -90,10 +86,13 @@ export default {
       if (localStorage.getItem("today")) {
         if (parseInt(localStorage.getItem("today")) < day) {
           if (localStorage.getItem("lastSubmitted")!=this.$store.state.solution || parseInt(localStorage.getItem("currentGuessIndex"))>=6)  {
+            this.$store.state.guesses = ["", "", "", "", "", ""],
+            this.$store.state.colorList = [["", "", "", "", ""], ["", "", "", "", ""], ["", "", "", "", ""], ["", "", "", "", ""], ["", "", "", "", ""], ["", "", "", "", ""]],
+            this.$store.state.guessedLetters = { miss: [], found: [], hint: [] },
             localStorage.setItem("currentGuessIndex", 0)
-            localStorage.setItem("guesses", JSON.stringify(["", "", "", "", "", ""]));
-            localStorage.setItem("color", JSON.stringify([["", "", "", "", ""], ["", "", "", "", ""], ["", "", "", "", ""], ["", "", "", "", ""], ["", "", "", "", ""], ["", "", "", "", ""]]));
-            localStorage.setItem("guessedLetters", JSON.stringify(this.guessedLetters));
+            localStorage.setItem("guesses", JSON.stringify(this.$store.state.guesses));
+            localStorage.setItem("color", JSON.stringify(this.$store.state.colorList));
+            localStorage.setItem("guessedLetters", JSON.stringify(this.$store.state.guessedLetters));
             this.$store.state.isFinished = false
             localStorage.setItem("today", day)
           }
@@ -161,6 +160,10 @@ export default {
 
 <style>
 @import '~bulma/css/bulma.css';
+  .is-centered {
+    display: flex;
+    justify-content: center;
+  }
   .info {
     width: 370px;
 

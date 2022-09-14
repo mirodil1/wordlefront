@@ -101,9 +101,8 @@ export default {
 <style>
   .simple-keyboard.hg-theme-default.myTheme {
       background: #fff;
-      max-width: 540px;
-      position: fixed;
-      bottom: 0;
+      margin-top: 31px;
+      max-width: 650px;
   }
 
   .simple-keyboard.hg-layout-default .hg-button.key-bg{
@@ -136,4 +135,27 @@ export default {
     background: #6aaa64;
     color: white;
   }
+
+  @media only screen and (max-width: 350px) {
+        .simple-keyboard.hg-theme-default.myTheme {
+          margin-top: 30px;
+        }
+    }
+    @media only screen and (min-width: 320px) 
+                       and (max-width: 359px){
+        .letter-border {
+            width: 27.59px;
+            height: 27.59px;
+            /* box-sizing: border-box; */
+            line-height: 23px;
+            font-size: 20px;
+            /* text-align: center; */
+        }
+    }
+    @media only screen and (min-width: 400px) 
+                       and (max-width: 430px){
+        .simple-keyboard.hg-theme-default.myTheme {
+          margin-top: 90px;
+        }
+    }
 </style>

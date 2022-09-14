@@ -1,6 +1,6 @@
 <template>
-    <div class="column">
-        <div class="columns is-flex is-centered" :class="{'animate__animated animate__shakeX': isActive}">
+    <div class="column is-12">
+        <div class="columns is-flex is-vcentered is-centered" :class="{'animate__animated animate__shakeX': isActive}">
             <Letter
                 v-for="i in 5"
                 :key="i"
@@ -98,3 +98,4 @@ export default {
     },
 }
 </script>
+
