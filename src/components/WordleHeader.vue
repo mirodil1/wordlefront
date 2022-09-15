@@ -1,7 +1,7 @@
 <template>
     <div class="header">
         <div class="title is-size-6-mobile mt-5">
-            @WORDLEUZBOT
+            @WordleUzBot
         </div>
         <div class="icon-menu">
             <button type="button" id="help-button" @click="showAboutStatus" class="button" aria-label="Help" tabindex="-1">

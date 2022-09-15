@@ -2,6 +2,11 @@
     <div 
         class="letter-border has-text-centered has-text-weight-bold "
         :class="{
+            'border-gray-500':
+                color == '' &&
+                letter.length > 0,
+            '': !pulse,
+            'scale': pulse,
             'has-background-grey-light has-text-white animate__animated animate__flipInX'
              : color == 'gray',
             'has-background-success	has-text-white animate__animated animate__flipInX'
@@ -17,10 +22,6 @@
 <script>
 export default {
     name: "Letter",
-    data() {
-        return {
-        }
-    },
     props: {
         letter: {
             type: String,
@@ -32,19 +33,45 @@ export default {
         },
         
     },
+    data() {
+        return {
+            pulse: false,
+        }
+    },
+    
+    watch: {
+        letter: {
+            handler(letter) {
+                if (letter && letter.length > 0) {
+                    this.pulse = true;
+                    setTimeout(() => {
+                        this.pulse = false;
+                    }, 70)
+                }
+            }
+        }
+    }
 }
 </script>
 
 <style scoped>
-
+    .scale {
+        transform: scale(1.05);
+    }
+    .border-gray-500 {
+        border-color: #000000 !important;
+    }
     .has-background-warning {
         background: #c9b458 !important;
+        border-color: #c9b458 !important;
     }
     .has-background-grey-light {
         background: #787c7e !important;
+        border-color: #787c7e !important;
     }
     .has-background-success {
         background: #6aaa64 !important;
+        border-color: #6aaa64 !important; 
     }
     .letter-border {
         width: 60px;
@@ -69,10 +96,8 @@ export default {
         .letter-border {
             width: 27.59px;
             height: 27.59px;
-            /* box-sizing: border-box; */
             line-height: 23px;
             font-size: 20px;
-            /* text-align: center; */
         }
     }
 

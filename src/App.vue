@@ -64,7 +64,7 @@ export default {
   },
   mounted() {
     // this.getWords()
-    window.addEventListener("keyup", (e) =>{
+    window.addEventListener("keypress", (e) =>{
       e.preventDefault();
       let button =
         e.keyCode == 13
@@ -72,8 +72,16 @@ export default {
          : e.keyCode == 8
          ? "{bksp}"
          : String.fromCharCode(e.keyCode).toLowerCase();
-      this.onKeyPress(button.toLowerCase())
-    } )
+         this.onKeyPress(button.toLowerCase())
+    })
+    window.addEventListener("keyup", (e) =>{
+      e.preventDefault();
+      let button =
+         e.keyCode == 8
+         ? "{bksp}"
+         : ""
+        this.onKeyPress(button)
+    })
     document.title = "Wordle"
   },
   methods: {
@@ -152,8 +160,7 @@ export default {
           guesses[currentGuessIndex] += button;
         }
       }
-    },    
-   
+    },
   }
 }
 </script>
