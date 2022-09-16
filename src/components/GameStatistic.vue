@@ -29,7 +29,7 @@
                 <p id="demo" class="has-text-bold has-text-centered is-size-6">Янги сўз киритилишини кутинг</p>
                 </div>
                 <div class="column">
-                <button class="button is-primary has-text-centered is-centered" @click="sendResult">УЛАШИШ</button>
+                <button class="button is-primary has-text-centered is-centered" @click="share">УЛАШИШ</button>
                 </div>
             </div>
             </section>
@@ -49,12 +49,12 @@ export default {
        } 
     },
     mounted() {
-        let tg = window.Telegram.WebApp;
-        window.Telegram.WebApp.onEvent('mainButtonClicked', function(){
-            tg.sendData("some string that we need to send"); 
-            alert("sent")
-            //при клике на основную кнопку отправляем данные в строковом виде
-        });
+        // let tg = window.Telegram.WebApp;
+        // window.Telegram.WebApp.onEvent('mainButtonClicked', function(){
+        //     tg.sendData("some string that we need to send"); 
+        //     alert("sent")
+        //     //при клике на основную кнопку отправляем данные в строковом виде
+        // });
     },
     methods: {
 
