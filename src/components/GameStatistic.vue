@@ -55,10 +55,10 @@ export default {
         sendResult() {
             let tg = window.Telegram.WebApp;
             tg.sendData("something")
+            alert(tg.initDataUnsafe.user.first_name)
+            alert(tg.initDataUnsafe.user.id)
             console.log(tg.sendData("something"))
             console.log(tg)
-            console.log(tg.initDataUnsafe.user.first_name)
-            console.log(tg.initDataUnsafe.user.id)
         },
 
         share() {
