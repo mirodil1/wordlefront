@@ -29,7 +29,7 @@
                 <p id="demo" class="has-text-bold has-text-centered is-size-6">Янги сўз киритилишини кутинг</p>
                 </div>
                 <div class="column">
-                <button class="button is-primary has-text-centered is-centered" @click="share">УЛАШИШ</button>
+                <button class="button is-primary has-text-centered is-centered" @click="sendResult">УЛАШИШ</button>
                 </div>
             </div>
             </section>
@@ -51,6 +51,13 @@ export default {
     mounted() {
     },
     methods: {
+
+        sendResult() {
+            let tg = window.Telegram.WebApp;
+            tg.sendData("something")
+            console.log("tg")
+        },
+
         share() {
             if (navigator.share) {
                     navigator.share({
