@@ -55,7 +55,14 @@ export default {
         sendResult() {
             let tg = window.Telegram.WebApp;
             tg.sendData("something to send")
+            tg.MainButton.isVisible = true
+            tg.MainButton.text = "SEnd Data";
+            console.log(tg.MainButton.isVisible = true)
             let data_from_web = tg.sendData("something to send")
+            window.Telegram.WebApp.onEvent('mainButtonClicked', function(){
+                tg.sendData("some string that we need to send"); 
+                //при клике на основную кнопку отправляем данные в строковом виде
+            });
             alert(data_from_web)
             // alert(tg.initDataUnsafe.user.first_name)
             // alert(tg.initDataUnsafe.user.id)
