@@ -23,12 +23,13 @@
   <script>
     let tg = window.Telegram.WebApp;
     tg.expand()
-    tg.MainButton.isVisible = true
-    Telegram.WebApp.onEvent('mainButtonClicked', function(){
-            tg.sendData("some string that we need to send"); 
-            alert("sent")
-            //при клике на основную кнопку отправляем данные в строковом виде
-        });
+    // tg.MainButton.isVisible = true
+    // Telegram.WebApp.onEvent('mainButtonClicked', function(){
+    //         tg.sendData("some string that we need to send"); 
+    //         alert("sent")
+    //         alert(tg.sendData("some string that we need to send"))
+    //         //при клике на основную кнопку отправляем данные в строковом виде
+    //     });
     // tg.sendData("something to send")
   </script>
 </html>
