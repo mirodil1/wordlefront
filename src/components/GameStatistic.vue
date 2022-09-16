@@ -55,6 +55,7 @@ export default {
         sendResult() {
             let tg = window.Telegram.WebApp;
             tg.sendData("something")
+            console.log(tg.sendData("something"))
             console.log(tg)
         },
 
