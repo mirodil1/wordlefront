@@ -70,19 +70,19 @@ export default {
     methods: {
         sendResult() {
             let tg = window.Telegram.WebApp;
-            let statText = {smth: "<b>СТАТИСТИКА</b>\n\n"}
-            
-            statText.smth+= `Ўйналган ўйинлар — <b>${this.$store.state.numberOfGames} </b>та\n`
-            statText.smth+= `Ғалаба — <b> ${this.$store.state.victoryPercentage} % </b>\n`
-            statText.smth+= `Кетма-кет ғалаба — <b>${this.$store.state.sequenceVictory} </b>та\n`
-            statText.smth+= `Кетма-кет ғалабалар рекорди — <b>${this.$store.state.sequenceVictoryRecord}</b> та\n\n`
-            statText.smth+= "<b>ТАХМИНЛАР ТАҚСИМОТИ</b>\n\n"
-            statText.smth+= `1 🤯 × <b>${this.$store.state.trueGuess[0]}</b>\n`
-            statText.smth+= `2 🤩 × <b>${this.$store.state.trueGuess[1]}</b>\n`
-            statText.smth+= `3 😎 × <b>${this.$store.state.trueGuess[2]}</b>\n`
-            statText.smth+= `4 🥳 × <b>${this.$store.state.trueGuess[3]}</b>\n`
-            statText.smth+= `5 👍 × <b>${this.$store.state.trueGuess[4]}</b>\n`
-            statText.smth+= `6 👏 × <b>${this.$store.state.trueGuess[5]}</b>\n`
+            let statText = "<b>СТАТИСТИКА</b>\n\n"    
+
+            statText+= `Ўйналган ўйинлар — <b>${this.$store.state.numberOfGames} </b>та\n`
+            statText+= `Ғалаба — <b> ${this.$store.state.victoryPercentage} % </b>\n`
+            statText+= `Кетма-кет ғалаба — <b>${this.$store.state.sequenceVictory} </b>та\n`
+            statText+= `Кетма-кет ғалабалар рекорди — <b>${this.$store.state.sequenceVictoryRecord}</b> та\n\n`
+            statText+= "<b>ТАХМИНЛАР ТАҚСИМОТИ</b>\n\n"
+            statText+= `1 🤯 × <b>${this.$store.state.trueGuess[0]}</b>\n`
+            statText+= `2 🤩 × <b>${this.$store.state.trueGuess[1]}</b>\n`
+            statText+= `3 😎 × <b>${this.$store.state.trueGuess[2]}</b>\n`
+            statText+= `4 🥳 × <b>${this.$store.state.trueGuess[3]}</b>\n`
+            statText+= `5 👍 × <b>${this.$store.state.trueGuess[4]}</b>\n`
+            statText+= `6 👏 × <b>${this.$store.state.trueGuess[5]}</b>\n`
             
             let userTry = ""
 
@@ -93,11 +93,7 @@ export default {
                 userTry+=`\n`
             }
 
-            this.statData.data = statText
-            this.statData.userTries = userTry
-            console.log(this.statData)
-
-            tg.sendData(statText)
+            tg.sendData(statText, userTry)
         },
 
         share() {
