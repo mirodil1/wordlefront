@@ -44,6 +44,10 @@ export default {
     name: "GameStatistic",
     data() {
        return {
+        statData: {
+            data: "",
+            userTries: ""
+        }
        } 
     },
     props: {
@@ -79,9 +83,21 @@ export default {
             statText+= `4 🥳 × <b>${this.$store.state.trueGuess[3]}</b>\n`
             statText+= `5 👍 × <b>${this.$store.state.trueGuess[4]}</b>\n`
             statText+= `6 👏 × <b>${this.$store.state.trueGuess[5]}</b>\n`
+            
+            let userTry = ""
 
-            statText+=`${this.$store.state.userTries}`
-            tg.sendData(statText)
+            for (let i = 0; i < this.$store.state.userTries.length; i++) {
+                for (let j = 0; j < 5; j++) {
+                    userTry+=`${this.$store.state.userTries[i][j]}`
+                }
+                userTry+=`\n`
+            }
+
+            this.statData.data = statText
+            this.statData.userTries = userTry
+            console.log(this.statData)
+
+            tg.sendData(this.statData)
         },
 
         share() {

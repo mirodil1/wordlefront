@@ -67,7 +67,7 @@ export default {
                         await new Promise((resolve) => setTimeout(resolve, 500));
                     }
                     localStorage.setItem("color", JSON.stringify(this.$store.state.colorList))
-                    localStorage.setItem("color", JSON.stringify(this.$store.state.userTries))
+                    localStorage.setItem("userTries", JSON.stringify(this.$store.state.userTries))
 
                     if (s == v) {
                         localStorage.setItem('lastSubmitted', s)

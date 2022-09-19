@@ -35,7 +35,6 @@ export default {
     methods: {
         showAboutStatus() {
             this.$store.state.aboutStatus = true
-            console.log("about")
         },
         showStat() {
           this.$store.state.isFinished = true
