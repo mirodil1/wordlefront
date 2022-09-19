@@ -73,7 +73,7 @@ export default {
                 Кетма-кет ғалаба — ${this.$store.state.sequenceVictory} та
                 Кетма-кет ғалабалар рекорди — ${this.$store.state.sequenceVictoryRecord} та \n\n
 
-                <b>ТАХМИНЛАР ТАҚСИМОТИ<b>\n
+                <b>ТАХМИНЛАР ТАҚСИМОТИ</b>\n
                 1 🤯 × ${this.$store.state.trueGuess[0]} \n
                 2 🤩 × ${this.$store.state.trueGuess[1]} \n
                 3 😎 × ${this.$store.state.trueGuess[2]} \n
