@@ -66,20 +66,19 @@ export default {
     methods: {
         sendResult() {
             let tg = window.Telegram.WebApp;
-            let statText = `
-            <b>СТАТИСТИКА</b>\n
-            Ўйналган ўйинлар — ${this.$store.state.numberOfGames} та
-            Ғалаба — ${this.$store.state.victoryPercentage} %
-            Кетма-кет ғалаба — ${this.$store.state.sequenceVictory} та
-            Кетма-кет ғалабалар рекорди — ${this.$store.state.sequenceVictoryRecord} та
-            <b>ТАХМИНЛАР ТАҚСИМОТИ</b>\n
-            1 🤯 × ${this.$store.state.trueGuess[0]}
-            2 🤩 × ${this.$store.state.trueGuess[1]}
-            3 😎 × ${this.$store.state.trueGuess[2]}
-            4 🥳 × ${this.$store.state.trueGuess[3]}
-            5 👍 × ${this.$store.state.trueGuess[4]}
-            6 👏 × ${this.$store.state.trueGuess[5]}
-            `
+            let statText = "<b>СТАТИСТИКА</b>"
+            
+            statText+= `Ўйналган ўйинлар — ${this.$store.state.numberOfGames} та`
+            statText+= `Ғалаба — ${this.$store.state.victoryPercentage} %`
+            statText+= `Кетма-кет ғалаба — ${this.$store.state.sequenceVictory} та`
+            statText+= `Кетма-кет ғалабалар рекорди — ${this.$store.state.sequenceVictoryRecord} та`
+            statText+= "<b>ТАХМИНЛАР ТАҚСИМОТИ</b>"
+            statText+= `1 🤯 × ${this.$store.state.trueGuess[0]}`
+            statText+= `2 🤩 × ${this.$store.state.trueGuess[1]}`
+            statText+= `3 😎 × ${this.$store.state.trueGuess[2]}`
+            statText+= `4 🥳 × ${this.$store.state.trueGuess[3]}`
+            statText+= `5 👍 × ${this.$store.state.trueGuess[4]}`
+            statText+= `6 👏 × ${this.$store.state.trueGuess[5]}`
             tg.sendData(statText)
         },
 
