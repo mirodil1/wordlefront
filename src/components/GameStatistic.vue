@@ -97,7 +97,7 @@ export default {
             this.statData.userTries = userTry
             console.log(this.statData)
 
-            tg.sendData(this.statText)
+            tg.sendData(statText)
         },
 
         share() {
