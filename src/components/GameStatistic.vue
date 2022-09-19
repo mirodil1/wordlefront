@@ -46,7 +46,8 @@ export default {
        return {
         statData: {
             data: "",
-            userTries: ""
+            userTries: "",
+            setEmoji: "",
         }
        } 
     },
@@ -70,8 +71,9 @@ export default {
     methods: {
         sendResult() {
             let tg = window.Telegram.WebApp;
-            let statText = "<b>СТАТИСТИКА</b>\n\n"    
-                
+            let emoji = ["🤯", "🤩", "😎", "🥳", "👍", "👏"]
+            let statText = "<b>СТАТИСТИКА</b>\n\n"
+
             statText+= `Ўйналган ўйинлар — <b>${this.$store.state.numberOfGames} </b>та\n`
             statText+= `Ғалаба — <b> ${this.$store.state.victoryPercentage} % </b>\n`
             statText+= `Кетма-кет ғалаба — <b>${this.$store.state.sequenceVictory} </b>та\n`
@@ -95,7 +97,7 @@ export default {
 
             this.statData.data = statText
             this.statData.userTries = userTry
-            console.log(JSON.stringify(this.statData))
+            this.statData.setEmoji = emoji[this.$store.state.currentGuessIndex-1]
 
             tg.sendData(JSON.stringify(this.statData))
         },
