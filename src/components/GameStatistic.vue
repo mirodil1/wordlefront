@@ -66,20 +66,19 @@ export default {
     methods: {
         sendResult() {
             let tg = window.Telegram.WebApp;
-            let statText = ` \
-                <b>СТАТИСТИКА</b>n\
+            let statText = `
+                <b>СТАТИСТИКА</b>\n
                 Ўйналган ўйинлар — ${this.$store.state.numberOfGames} та
                 Ғалаба — ${this.$store.state.victoryPercentage} %
                 Кетма-кет ғалаба — ${this.$store.state.sequenceVictory} та
-                Кетма-кет ғалабалар рекорди — ${this.$store.state.sequenceVictoryRecord} та \n\n
-
+                Кетма-кет ғалабалар рекорди — ${this.$store.state.sequenceVictoryRecord} та \n
                 <b>ТАХМИНЛАР ТАҚСИМОТИ</b>\n
-                1 🤯 × ${this.$store.state.trueGuess[0]} \n
-                2 🤩 × ${this.$store.state.trueGuess[1]} \n
-                3 😎 × ${this.$store.state.trueGuess[2]} \n
-                4 🥳 × ${this.$store.state.trueGuess[3]} \n
-                5 👍 × ${this.$store.state.trueGuess[4]} \n
-                6 👏 × ${this.$store.state.trueGuess[5]} \n
+                1 🤯 × ${this.$store.state.trueGuess[0]}
+                2 🤩 × ${this.$store.state.trueGuess[1]}
+                3 😎 × ${this.$store.state.trueGuess[2]}
+                4 🥳 × ${this.$store.state.trueGuess[3]}
+                5 👍 × ${this.$store.state.trueGuess[4]}
+                6 👏 × ${this.$store.state.trueGuess[5]}
             `
             tg.sendData(statText)
         },
