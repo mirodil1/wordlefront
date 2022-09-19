@@ -6,7 +6,7 @@
             <section class="modal-card-body">
             <button class="delete is-pulled-right" @click="removeStat" aria-label="close"></button>
             <p class="card-title has-text-centered subtitle is-family-secondary is-size-4">СТАТИСТИКА</p>
-            <div class="columns px-4 py-3 is-flex">
+            <!-- <div class="columns px-4 py-3 is-flex">
                 <div class="column px-4">
                 <p class="has-text-centered is-size-3">{{this.$store.state.numberOfGames}}</p>
                 <p class="has-text-centered is-size-7">та ўйин</p>
@@ -31,7 +31,7 @@
                 <div class="column">
                 <button class="button is-primary has-text-centered is-centered" @click="share">УЛАШИШ</button>
                 </div>
-            </div>
+            </div> -->
             </section>
         </div>
         </div>
@@ -79,8 +79,9 @@ export default {
             statText+= `4 🥳 × <b>${this.$store.state.trueGuess[3]}</b>\n`
             statText+= `5 👍 × <b>${this.$store.state.trueGuess[4]}</b>\n`
             statText+= `6 👏 × <b>${this.$store.state.trueGuess[5]}</b>\n`
+
+            statText+=`${this.$store.state.userTries}`
             tg.sendData(statText)
-            tg.sendData("😎")
         },
 
         share() {

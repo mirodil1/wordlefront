@@ -44,10 +44,12 @@ export default {
 
                     // adding colors for letteres
                     let temp = ["gray", "gray", "gray", "gray", "gray"];
+                    let userTries = ['⬜️', '⬜️', '⬜️', '⬜️', '⬜️']
                     let letterPool = [];
                     for (let i = 0; i < 5; i++) {
                         if (s.charAt(i) == v.charAt(i)) {
                             temp[i] = "green";
+                            userTries[i] = '🟩'
                         } else {
                             letterPool.push(s.charAt(i));
                         }
@@ -57,12 +59,15 @@ export default {
                             if (letterPool.indexOf(v.charAt(i)) != -1) {
                                 letterPool.splice(letterPool.indexOf(v.charAt(i)), 1);
                                 temp[i] = "yellow";
+                                userTries[i] = "🟨"
                             }
                         }
                         this.$store.state.colorList[this.$store.state.currentGuessIndex-1][i] = temp[i]
+                        this.$store.state.userTries[this.$store.state.currentGuessIndex-1][i] = userTries[i]
                         await new Promise((resolve) => setTimeout(resolve, 500));
                     }
                     localStorage.setItem("color", JSON.stringify(this.$store.state.colorList))
+                    localStorage.setItem("color", JSON.stringify(this.$store.state.userTries))
 
                     if (s == v) {
                         localStorage.setItem('lastSubmitted', s)

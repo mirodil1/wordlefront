@@ -12,6 +12,7 @@ export default createStore({
       hint: []
     },
     colorList: [["", "", "", "", ""], ["", "", "", "", ""], ["", "", "", "", ""], ["", "", "", "", ""], ["", "", "", "", ""], ["", "", "", "", ""]],
+    userTries: [["", "", "", "", ""], ["", "", "", "", ""], ["", "", "", "", ""], ["", "", "", "", ""], ["", "", "", "", ""], ["", "", "", "", ""]],
     lastSubmitted: "",
     isWinner: null,
     isFinished: null,
@@ -34,6 +35,12 @@ export default createStore({
   },
   mutations: {
     initializeValue(state) {
+      if (localStorage.getItem("userTries")) {
+        state.userTries = JSON.parse(localStorage.getItem("userTries"));
+      } else {
+        localStorage.setItem("color", JSON.stringify(state.userTries));
+      }
+
       if (localStorage.getItem("trueGuess")) {
         state.trueGuess = JSON.parse(localStorage.getItem("trueGuess"));
       } else {
