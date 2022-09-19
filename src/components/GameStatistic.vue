@@ -5,7 +5,9 @@
             <div class="modal-card info pb-5">
             <section class="modal-card-body">
             <button class="delete is-pulled-right" @click="removeStat" aria-label="close"></button>
-            <p class="card-title has-text-centered subtitle is-family-secondary is-size-4">СТАТИСТИКА</p>
+            <p class="card-title has-text-centered subtitle is-family-secondary is-size-5">Янги сўз киритилишини кутинг</p>
+            <p id="demo" class="has-text-bold has-text-centered is-size-2"></p>
+
             <!-- <div class="columns px-4 py-3 is-flex">
                 <div class="column px-4">
                 <p class="has-text-centered is-size-3">{{this.$store.state.numberOfGames}}</p>
@@ -52,14 +54,15 @@ export default {
        } 
     },
     props: {
-        isFinished: Boolean
+        gameOver: Boolean
     },
     mounted() {
+        this.timer()
     },
     watch: {
-        isFinished: {
-            handler(isFinished) {
-                if (isFinished) {
+        gameOver: {
+            handler(gameOver) {
+                if (gameOver) {
                     console.log("Finished")
                     setTimeout(()=> {
                         this.sendResult()
@@ -86,9 +89,9 @@ export default {
             statText+= `5 👍 × <b>${this.$store.state.trueGuess[4]}</b>\n`
             statText+= `6 👏 × <b>${this.$store.state.trueGuess[5]}</b>\n`
             
-            let userTry = ""
+            let userTry = localStorage.getItem("isWinner") ? `${localStorage.getItem('currentGuessIndex')}/6` : "x/6 \n"
 
-            for (let i = 0; i < this.$store.state.userTries.length; i++) {
+            for (let i = 0; i < this.$store.state.currentGuessIndex.length-1; i++) {
                 for (let j = 0; j < 5; j++) {
                     userTry+=`${this.$store.state.userTries[i][j]}`
                 }
@@ -137,36 +140,41 @@ export default {
                 duration: 2000,
                 position: 'top-center',
             })
-        }
+        },
 
-        // timer() {
-        //     var countDownDate = new Date("Aug 23, 2022 14:36:00 GMT-09:00").getTime() + new Date().getTime();
-        //     // Update the count down every 1 second
-        //     var x = setInterval(function() {
+        timer() {
+            var tomorrow =  new Date().getDate() + 1
+            var month = new Date().getMonth()+1
+            var year = new Date().getFullYear()
+            var countDownDate = new Date(`${month} ${tomorrow} ${year} 00:00:00`)
 
-        //     // Get today's date and time
-        //     var now = new Date().getTime();
+            // Update the count down every 1 second
+            var x = setInterval(function() {
+
+            // Get today's date and time
+            var now = new Date().getTime();
                 
-        //     // Find the distance between now and the count down date
-        //     var distance = countDownDate - now;
+            // Find the distance between now and the count down date
+            var distance = countDownDate.getTime() - now;
             
-        //     // Time calculations for days, hours, minutes and seconds
-        //     //var days = Math.floor(distance / (1000 * 60 * 60 * 24));
-        //     var hours = Math.floor((distance % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60));
-        //     var minutes = Math.floor((distance % (1000 * 60 * 60)) / (1000 * 60));
-        //     var seconds = Math.floor((distance % (1000 * 60)) / 1000);
-        //     // Output the result in an element with id="demo"
-        //     // this.timerP = hours + ":"
-        //     // + minutes + ":" + seconds;
-        //     document.getElementById("demo").innerHTML = hours + ":"
-        //     + minutes + ":" + seconds;
+            // Time calculations for days, hours, minutes and seconds
+            // var days = Math.floor(distance / (1000 * 60 * 60 * 24));
+            var hours = Math.floor((distance % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60));
+            var minutes = Math.floor((distance % (1000 * 60 * 60)) / (1000 * 60));
+            var seconds = Math.floor((distance % (1000 * 60)) / 1000);
+            // Output the result in an element with id="demo"
+            // this.timerP = hours + ":"
+            // + minutes + ":" + seconds;
+            document.getElementById("demo").innerHTML = hours + ":"
+            + minutes + ":" + seconds;
                 
-        //     // If the count down is over, write some text 
-        //     if (distance < 0) {
-        //         clearInterval(x);
-        //     }
-        //     }, 1000);
-        // }
+            // If the count down is over, write some text 
+            if (distance < 0) {
+                clearInterval(x);
+                document.getElementById("demo").innerHTML = "Янги сўз киритилишини кутинг";
+            }
+            }, 1000);
+        }
     },
 
 }

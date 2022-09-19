@@ -6,7 +6,7 @@
     <About
     />
     <GameStatistic
-     :isFinished="this.$store.state.isFinished"
+     :isFinished="this.$store.state.gameOver"
     />
     
     <div class="">

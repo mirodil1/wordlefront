@@ -31,6 +31,7 @@ export default createStore({
       0,
       0,
     ],
+    gameOver: false,
     passedDay: 0
   },
   mutations: {
@@ -97,7 +98,7 @@ export default createStore({
       } else if (parseInt(localStorage.getItem('currentGuessIndex'))>=6) {
         state.isFinished = true
       }
-    }, 
+    },
     setIsWinner(state, status) {
       state.isWinner = status
       console.log(state.isWinner)
