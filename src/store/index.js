@@ -22,10 +22,24 @@ export default createStore({
     numberOfVictory: 0,
     aboutStatus: false,
     isNewUser: true,
+    trueGuess: [
+      0,
+      0,
+      0,
+      0,
+      0,
+      0,
+    ],
     passedDay: 0
   },
   mutations: {
     initializeValue(state) {
+      if (localStorage.getItem("trueGuess")) {
+        state.trueGuess = JSON.parse(localStorage.getItem("trueGuess"));
+      } else {
+        localStorage.setItem("trueGuess", JSON.stringify(state.trueGuess));
+      }
+
       if (localStorage.getItem("guessedLetters")) {
         state.guessedLetters = JSON.parse(localStorage.getItem("guessedLetters"));
       } else {
@@ -95,7 +109,6 @@ export default createStore({
       if (localStorage.getItem("numberOfsequenceVictory")) {
         if (state.lastSubmitted == state.solution) {
           let numberOfsequenceVictory = localStorage.getItem("numberOfsequenceVictory")
-          console.log(numberOfsequenceVictory)
           localStorage.setItem("numberOfsequenceVictory", parseInt(numberOfsequenceVictory)+1)
           state.sequenceVictory = parseInt(localStorage.getItem("numberOfsequenceVictory"))
         } else if (state.currentGuessIndex >= 6) {

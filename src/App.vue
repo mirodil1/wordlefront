@@ -5,7 +5,10 @@
     <Header/>
     <About
     />
-    <GameStatistic/>
+    <GameStatistic
+     :isFinished="this.$store.state.isFinished"
+    />
+    
     <div class="">
       <div class="mt-6">
         <WordRow
@@ -60,7 +63,6 @@ export default {
   beforeMount() {
     this.getWords()
     this.$store.commit("initializeValue")
-    console.log(JSON.parse(localStorage.getItem("guessedLetters")))
   },
   mounted() {
     // this.getWords()

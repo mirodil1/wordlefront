@@ -1,6 +1,6 @@
 <template>
     <div class="modal p-6 animate__animated animate__fadeIn" v-bind:class="{'is-active': this.$store.state.isFinished}">
-        <div class="modal-background"></div>
+        <!-- <div class="modal-background"></div>
         <div class="">
             <div class="modal-card info pb-5">
             <section class="modal-card-body">
@@ -34,8 +34,7 @@
             </div>
             </section>
         </div>
-        </div>
-        <!-- <button class="modal-close is-large" aria-label="close"></button> -->
+        </div> -->
     </div>
 </template>
 
@@ -45,35 +44,44 @@ export default {
     name: "GameStatistic",
     data() {
        return {
-
        } 
     },
+    props: {
+        isFinished: Boolean
+    },
     mounted() {
-        
-        let tg = window.Telegram.WebApp;
-        tg.sendData("some string that we need to send"); 
-        // window.Telegram.WebApp.onEvent('mainButtonClicked', function(){
-        //     tg.sendData("some string that we need to send"); 
-        //     alert("sent")
-        //     //при клике на основную кнопку отправляем данные в строковом виде
-        // });
+    },
+    watch: {
+        isFinished: {
+            handler(isFinished) {
+                if (isFinished) {
+                    console.log("Finished")
+                    setTimeout(()=> {
+                        this.sendResult()
+                    }, 1000)
+                }
+            }
+        }
     },
     methods: {
-
         sendResult() {
             let tg = window.Telegram.WebApp;
-            tg.sendData("something to send")
-            tg.MainButton.isVisible = true
-            tg.MainButton.text = "SEnd Data";
-            console.log(tg.MainButton.isVisible = true)
-            let data_from_web = tg.sendData("something to send")
-            
-            alert(data_from_web)
-        
-            // alert(tg.initDataUnsafe.user.first_name)
-            // alert(tg.initDataUnsafe.user.id)
-            // console.log(tg.sendData("something"))
-            console.log(tg)
+            let statText = ` \
+                <b>СТАТИСТИКА</b>n\
+                Ўйналган ўйинлар — ${this.$store.state.numberOfGames} та
+                Ғалаба — ${this.$store.state.victoryPercentage} %
+                Кетма-кет ғалаба — ${this.$store.state.sequenceVictory} та
+                Кетма-кет ғалабалар рекорди — ${this.$store.state.sequenceVictoryRecord} та \n\n
+
+                <b>ТАХМИНЛАР ТАҚСИМОТИ<b>\n
+                1 🤯 × ${this.$store.state.trueGuess[0]} \n
+                2 🤩 × ${this.$store.state.trueGuess[1]} \n
+                3 😎 × ${this.$store.state.trueGuess[2]} \n
+                4 🥳 × ${this.$store.state.trueGuess[3]} \n
+                5 👍 × ${this.$store.state.trueGuess[4]} \n
+                6 👏 × ${this.$store.state.trueGuess[5]} \n
+            `
+            tg.sendData(statText)
         },
 
         share() {

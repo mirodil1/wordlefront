@@ -38,9 +38,11 @@ export default {
             async handler(submitted) {
                 if (submitted) {
                     localStorage.setItem("guesses", JSON.stringify(this.$store.state.guesses));
-
+                    
                     let s = this.solution;
                     let v = this.value;
+
+                    // adding colors for letteres
                     let temp = ["gray", "gray", "gray", "gray", "gray"];
                     let letterPool = [];
                     for (let i = 0; i < 5; i++) {
@@ -60,15 +62,22 @@ export default {
                         this.$store.state.colorList[this.$store.state.currentGuessIndex-1][i] = temp[i]
                         await new Promise((resolve) => setTimeout(resolve, 500));
                     }
-                    console.log(this.$store.state.colorList)
                     localStorage.setItem("color", JSON.stringify(this.$store.state.colorList))
 
                     if (s == v) {
                         localStorage.setItem('lastSubmitted', s)
                         this.$store.commit('setIsWinner', true)
+
+                        // update and set number of victory
                         let numberOfVictory = this.$store.state.numberOfVictory
                         localStorage.setItem('numberOfVictory', parseInt(numberOfVictory)+1)
                         this.$store.state.lastSubmitted = s
+                        
+                        // update and set true guesses value
+                        this.$store.state.trueGuess[this.$store.state.currentGuessIndex-1] = this.$store.state.trueGuess[this.$store.state.currentGuessIndex-1] + 1
+                        localStorage.setItem("trueGuess", JSON.stringify(this.$store.state.trueGuess))
+
+                        // message when found word
                         toast({
                             message: this.victoryMessage[this.$store.state.currentGuessIndex-1],
                             type: 'is-success is-light',
@@ -79,6 +88,7 @@ export default {
                             position: 'top-center',
                         })
                     } else if (this.$store.state.currentGuessIndex >= 6) {
+                        // solution msg if cannot find word
                         toast({
                             message: this.$store.state.solution,
                             type: 'is-dark is-light',
@@ -88,7 +98,6 @@ export default {
                             duration: 2000,
                             position: 'top-center',
                         })
-                        
                     }
                     this.$store.commit('checkWinner')
                     this.$store.commit('checkNumberOfGames')

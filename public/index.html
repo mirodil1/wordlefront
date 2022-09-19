@@ -11,7 +11,7 @@
       href="https://cdnjs.cloudflare.com/ajax/libs/animate.css/4.1.1/animate.min.css"
     />
     <title><%= htmlWebpackPlugin.options.title %></title>
-    
+  
   </head>
   <body>
     <noscript>
@@ -23,13 +23,5 @@
   <script>
     let tg = window.Telegram.WebApp;
     tg.expand()
-    // tg.MainButton.isVisible = true
-    // Telegram.WebApp.onEvent('mainButtonClicked', function(){
-    //         tg.sendData("some string that we need to send"); 
-    //         alert("sent")
-    //         alert(tg.sendData("some string that we need to send"))
-    //         //при клике на основную кнопку отправляем данные в строковом виде
-    //     });
-    // tg.sendData("something to send")
   </script>
 </html>
