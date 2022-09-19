@@ -71,7 +71,7 @@ export default {
         sendResult() {
             let tg = window.Telegram.WebApp;
             let statText = "<b>СТАТИСТИКА</b>\n\n"    
-
+                
             statText+= `Ўйналган ўйинлар — <b>${this.$store.state.numberOfGames} </b>та\n`
             statText+= `Ғалаба — <b> ${this.$store.state.victoryPercentage} % </b>\n`
             statText+= `Кетма-кет ғалаба — <b>${this.$store.state.sequenceVictory} </b>та\n`
@@ -93,7 +93,11 @@ export default {
                 userTry+=`\n`
             }
 
-            tg.sendData(statText, userTry)
+            this.statData.data = statText
+            this.statData.userTries = userTry
+            console.log(JSON.stringify(this.statData))
+
+            tg.sendData(JSON.stringify(this.statData))
         },
 
         share() {
