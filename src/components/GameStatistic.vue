@@ -1,6 +1,6 @@
 <template>
     <div class="modal p-6 animate__animated animate__fadeIn" v-bind:class="{'is-active': this.$store.state.isFinished}">
-        <!-- <div class="modal-background"></div>
+        <div class="modal-background"></div>
         <div class="">
             <div class="modal-card info pb-5">
             <section class="modal-card-body">
@@ -34,7 +34,7 @@
             </div>
             </section>
         </div>
-        </div> -->
+        </div>
     </div>
 </template>
 
@@ -80,6 +80,7 @@ export default {
             statText+= `5 👍 × <b>${this.$store.state.trueGuess[4]}</b>\n`
             statText+= `6 👏 × <b>${this.$store.state.trueGuess[5]}</b>\n`
             tg.sendData(statText)
+            tg.sendData("😎")
         },
 
         share() {
