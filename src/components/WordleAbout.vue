@@ -5,6 +5,8 @@
                 <section class="modal-card-body">
                     <button class="delete is-pulled-right" @click="removeAbout" aria-label="close"></button>
                     <div class="instruction">
+                        <p><strong>Ўйин қоидалари</strong></p>
+                        <br>    
                         <p>6 та уринишда кун <strong>СЎЗ</strong>ини топинг</p>
                         <br>
                         <p>Ҳар бир тахминдан сўнг, катакларнинг ранги ўзгариб, сизнинг тахминингиз кун сўзига қанчалик яқин эканлигини кўрсатади.</p>
@@ -22,25 +24,27 @@
                         <p class=""><strong>С</strong> ҳарфи СЎЗ ичида бор ва тўғри ўриндан жой олган.</p>
                         <div class="example">
                             <div class="row has-text-centered is-flex has-text-weight-medium">
-                                <p class="letter mr-1">С</p>
+                                <p class="letter mr-1">П</p>
                                 <p class="letter mr-1">А</p>
-                                <p class="letter mr-1 has-background-warning  has-text-white animate__animated animate__flipInX">Л</p>
-                                <p class="letter mr-1">О</p>
-                                <p class="letter mr-1">М</p>
+                                <p class="letter mr-1 has-background-warning  has-text-white animate__animated animate__flipInX">Х</p>
+                                <p class="letter mr-1">Т</p>
+                                <p class="letter mr-1">А</p>
                             </div>
                         </div>
-                        <p><strong>Л</strong> ҳарфи СЎЗ ичида бор ва нотўғри ўриндан жой олган.</p>
+                        <p><strong>Х</strong> ҳарфи СЎЗ ичида бор лекин нотўғри ўриндан жой олган.</p>
                         <div class="example">
                             <div class="row has-text-centered is-flex has-text-weight-medium">
-                                <p class="letter mr-1 animate__animated animate__fadeIn">С</p>
-                                <p class="letter mr-1">А</p>
-                                <p class="letter mr-1">Л</p>
-                                <p class="letter mr-1 has-text-white has-background-grey-light animate__animated animate__flipInX">О</p>
-                                <p class="letter mr-1">М</p>
+                                <p class="letter mr-1 animate__animated animate__fadeIn">К</p>
+                                <p class="letter mr-1">И</p>
+                                <p class="letter mr-1">Т</p>
+                                <p class="letter mr-1">О</p>
+                                <p class="letter mr-1 has-text-white has-background-grey-light animate__animated animate__flipInX">Б</p>
                             </div>
                         </div>
-                        <p><strong>О</strong> ҳарфи СЎЗ ичида иштирок этмаган.</p>
+                        <p><strong>Б</strong> ҳарфи СЎЗ ичида иштирок этмаган.</p>
                     </div>
+                    <br>
+                    <p><strong>Ҳар куни сўз янгиланади!</strong></p>
                 </section>
             </div>
     </div>

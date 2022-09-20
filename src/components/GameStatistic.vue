@@ -87,8 +87,8 @@
             statText+= `5 👍 × <b>${this.$store.state.trueGuess[4]}</b>\n`
             statText+= `6 👏 × <b>${this.$store.state.trueGuess[5]}</b>\n`
             
-            let userTry = localStorage.getItem("isWinner") ? `${localStorage.getItem('currentGuessIndex')}/6 \n` : "x/6 \n"
-
+            let userTry = `${this.$store.state.words_list.indexOf(this.$store.state.solution)+1} `
+            userTry +=  localStorage.getItem("isWinner") ? `${localStorage.getItem('currentGuessIndex')}/6 \n` : "x/6 \n"
             for (let i = 0; i < this.$store.state.currentGuessIndex; i++) {
                 for (let j = 0; j < 5; j++) {
                     userTry+=`${this.$store.state.userTries[i][j]}`
@@ -127,8 +127,8 @@
             // Output the result in an element with id="demo"
             // this.timerP = hours + ":"
             // + minutes + ":" + seconds;
-            document.getElementById("demo").innerHTML = hours + ":"
-            + minutes + ":" + seconds;
+            document.getElementById("demo").innerHTML = (hours <  10 ? "0" + hours : hours) + ":" +
+            (minutes <  10 ? "0" + minutes : minutes) + ":" +  (seconds <  10 ? "0" + seconds  : seconds);
                 
             // If the count down is over, write some text 
             if (distance < 0) {
