@@ -31,7 +31,9 @@ import axios from 'axios';
                     .get('api/v1/ads/1')
                     .then(response => {
                         this.ads = response.data
-                        console.log(this.ads)
+                        if(!this.ads.is_active) {
+                            this.$store.commit('checkWinner')
+                        }
                     })
                     .catch(error => {
                         console.log(error)

@@ -41,8 +41,7 @@
 </template>
 
 <script>
-import { toast } from 'bulma-toast'
-export default {
+    export default {
     name: "GameStatistic",
     data() {
        return {
@@ -102,44 +101,9 @@ export default {
             this.statData.setEmoji = localStorage.getItem("isWinner") ? emoji[this.$store.state.currentGuessIndex-1] : "😭"
             tg.sendData(JSON.stringify(this.statData))
         },  
-
-        share() {
-            if (navigator.share) {
-                    navigator.share({
-                    text: localStorage.getItem("isWinner") ? `${localStorage.getItem('currentGuessIndex')}/6` : "x/6",
-                    url: "https://t.me/WordleUzBot",
-                    title: "WordleUzBot"
-                })
-            } else {
-                navigator.clipboard.writeText(localStorage.getItem("isWinner") ? `${localStorage.getItem('currentGuessIndex')}/6` : "x/6")
-                toast({
-                message: "Кўчирилди",
-                type: 'is-success is-light',
-                dismissible: false,
-                animate: { in: 'backInDown', out: 'backOutDown' },
-                pauseOnHover: false,
-                duration: 2000,
-                position: 'top-center',
-            })
-            }
-        },
         removeStat() {
           this.$store.state.isFinished = false
         },
-        copyToClipBoard(){
-            let textToCopy = "https://t.me/gamewordlebot"
-            navigator.clipboard.writeText(textToCopy);    
-            toast({
-                message: "Кўчирилди",
-                type: 'is-success is-light',
-                dismissible: false,
-                animate: { in: 'backInDown', out: 'backOutDown' },
-                pauseOnHover: false,
-                duration: 2000,
-                position: 'top-center',
-            })
-        },
-
         timer() {
             var tomorrow =  new Date().getDate() + 1
             var month = new Date().getMonth()+1
