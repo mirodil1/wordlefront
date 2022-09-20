@@ -1,5 +1,5 @@
 <template>
-    <div>
+    <div v-if="ads.is_active">
         <div class="modal" :class="{'is-active': isActive}">
             <div class="modal-background"></div>
             <div class="modal-content">
@@ -31,6 +31,7 @@ import axios from 'axios';
                     .get('api/v1/ads/1')
                     .then(response => {
                         this.ads = response.data
+                        console.log(this.ads)
                     })
                     .catch(error => {
                         console.log(error)
