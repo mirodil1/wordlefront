@@ -51,7 +51,7 @@ export default {
             userTries: "",
             setEmoji: "",
         }
-       } 
+       }
     },
     props: {
         gameOver: Boolean
@@ -63,7 +63,6 @@ export default {
         gameOver: {
             handler(gameOver) {
                 if (gameOver) {
-                    console.log("Finished")
                     setTimeout(()=> {
                         this.sendResult()
                     }, 1000)
@@ -89,9 +88,9 @@ export default {
             statText+= `5 👍 × <b>${this.$store.state.trueGuess[4]}</b>\n`
             statText+= `6 👏 × <b>${this.$store.state.trueGuess[5]}</b>\n`
             
-            let userTry = localStorage.getItem("isWinner") ? `${localStorage.getItem('currentGuessIndex')}/6` : "x/6 \n"
+            let userTry = localStorage.getItem("isWinner") ? `${localStorage.getItem('currentGuessIndex')}/6 \n` : "x/6 \n"
 
-            for (let i = 0; i < this.$store.state.currentGuessIndex.length-1; i++) {
+            for (let i = 0; i < this.$store.state.currentGuessIndex; i++) {
                 for (let j = 0; j < 5; j++) {
                     userTry+=`${this.$store.state.userTries[i][j]}`
                 }
@@ -100,10 +99,9 @@ export default {
 
             this.statData.data = statText
             this.statData.userTries = userTry
-            this.statData.setEmoji = emoji[this.$store.state.currentGuessIndex-1]
-
+            this.statData.setEmoji = localStorage.getItem("isWinner") ? emoji[this.$store.state.currentGuessIndex-1] : "😭"
             tg.sendData(JSON.stringify(this.statData))
-        },
+        },  
 
         share() {
             if (navigator.share) {

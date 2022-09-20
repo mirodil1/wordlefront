@@ -39,7 +39,7 @@ export default createStore({
       if (localStorage.getItem("userTries")) {
         state.userTries = JSON.parse(localStorage.getItem("userTries"));
       } else {
-        localStorage.setItem("color", JSON.stringify(state.userTries));
+        localStorage.setItem("userTries", JSON.stringify(state.userTries));
       }
 
       if (localStorage.getItem("trueGuess")) {
