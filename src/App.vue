@@ -141,7 +141,6 @@ export default {
               }
             }
             localStorage.setItem('guessedLetters', JSON.stringify(this.$store.state.guessedLetters))
-            console.log(JSON.parse(localStorage.getItem("guessedLetters")))
           } else {
             toast({
                 message: "Бундай сўз рўйхатда мавжуд эмас",

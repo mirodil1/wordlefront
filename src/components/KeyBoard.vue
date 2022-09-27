@@ -69,7 +69,6 @@ export default {
   watch: {
     guessedLetters: {
       handler(guessedLetters) {
-        console.log(guessedLetters)
         this.keyboard.addButtonTheme(
           guessedLetters.miss.map(name => name.toUpperCase()).join(" "),
           "is-dark animate__animated animate__fadeIn"

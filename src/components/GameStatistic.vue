@@ -98,9 +98,9 @@
 
             this.statData.data = statText
             this.statData.userTries = userTry
-            this.statData.setEmoji = localStorage.getItem("isWinner") ? emoji[this.$store.state.currentGuessIndex-1] : "😭"
+            this.statData.setEmoji = localStorage.getItem("isWinner") ? emoji[this.$store.state.currentGuessIndex-1] : "☹️"
             tg.sendData(JSON.stringify(this.statData))
-        },  
+        },
         removeStat() {
           this.$store.state.isFinished = false
         },
