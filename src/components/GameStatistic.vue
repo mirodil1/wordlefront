@@ -5,7 +5,10 @@
             <div class="modal-card info pb-5">
             <section class="modal-card-body">
             <button class="delete is-pulled-right" @click="removeStat" aria-label="close"></button>
-            <p class="card-title has-text-centered subtitle is-family-secondary is-size-5">Янги сўз киритилишини кутинг</p>
+            <p class="is-size-5 has-text-centered">Бугунги сўз:</p>
+            <p class="has-text-bold has-text-centered is-uppercase is-size-4">{{this.$store.state.solution}}</p>
+            <br>
+            <p class="has-text-centered  is-size-5">Кун сўзи янгиланишигача:</p>
             <p id="demo" class="has-text-bold has-text-centered is-size-2"></p>
 
             <!-- <div class="columns px-4 py-3 is-flex">
@@ -88,7 +91,7 @@
             statText+= `6 👏 × <b>${this.$store.state.trueGuess[5]}</b>\n`
             
             let userTry = `${this.$store.state.words_list.indexOf(this.$store.state.solution)+1} `
-            userTry +=  localStorage.getItem("isWinner") ? `${localStorage.getItem('currentGuessIndex')}/6 \n` : "x/6 \n"
+            userTry +=  localStorage.getItem("isWinner") ? `${localStorage.getItem('currentGuessIndex')}/6 \n` : "x/6 \n\n"
             for (let i = 0; i < this.$store.state.currentGuessIndex; i++) {
                 for (let j = 0; j < 5; j++) {
                     userTry+=`${this.$store.state.userTries[i][j]}`
@@ -99,6 +102,7 @@
             this.statData.data = statText
             this.statData.userTries = userTry
             this.statData.setEmoji = localStorage.getItem("isWinner") ? emoji[this.$store.state.currentGuessIndex-1] : "☹️"
+            console.log( this.statData.setEmoji)
             tg.sendData(JSON.stringify(this.statData))
         },
         removeStat() {
