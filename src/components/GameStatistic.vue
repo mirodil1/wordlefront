@@ -91,18 +91,17 @@
             statText+= `6 👏 × <b>${this.$store.state.trueGuess[5]}</b>\n`
             
             let userTry = `${this.$store.state.words_list.indexOf(this.$store.state.solution)+1} `
-            userTry +=  localStorage.getItem("isWinner") ? `${localStorage.getItem('currentGuessIndex')}/6 \n` : "x/6 \n\n"
+            userTry +=  this.$store.state.isWinner ? `${localStorage.getItem('currentGuessIndex')}/6 \n` : "x/6 \n"
             for (let i = 0; i < this.$store.state.currentGuessIndex; i++) {
+                userTry+=`\n`
                 for (let j = 0; j < 5; j++) {
                     userTry+=`${this.$store.state.userTries[i][j]}`
                 }
-                userTry+=`\n`
             }
 
             this.statData.data = statText
             this.statData.userTries = userTry
-            this.statData.setEmoji = localStorage.getItem("isWinner") ? emoji[this.$store.state.currentGuessIndex-1] : "☹️"
-            console.log( this.statData.setEmoji)
+            this.statData.setEmoji = this.$store.state.isWinner ? emoji[this.$store.state.currentGuessIndex-1] : "☹️"
             tg.sendData(JSON.stringify(this.statData))
         },
         removeStat() {

@@ -94,6 +94,7 @@ export default {
                         })
                     } else if (this.$store.state.currentGuessIndex >= 6) {
                         // solution msg if cannot find word
+                        this.$store.commit('setIsWinner', false)
                         this.$store.state.gameOver = true
                         toast({
                             message: this.$store.state.solution,
