@@ -65,12 +65,12 @@ export default {
         
     },
     mounted(){
-        this.userData
+        this.userData()
     },
     methods: {
         userData() {
             const tg = window.Telegram.WebApp
-            this.user = tg.initDataUnsafe.user
+            this.user = tg.initDataUnsafe.user.id
             console.log(this.user)
         },
         removeAbout() {
