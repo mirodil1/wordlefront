@@ -1,12 +1,16 @@
 import { createRouter, createWebHistory } from 'vue-router'
-import App from '../App.vue'
-
-
+import Game from '../components/Game.vue'
+import Unlimited from '../components/unlimited/Unlimited.vue'
 const routes = [
   {
     path: '/',
-    name: 'App',
-    component: App
+    name: 'Game',
+    component: Game
+  },
+  {
+    path: '/mode=unlim/:telegram_id',
+    name: 'Unlimited',
+    component: Unlimited
   }
 ]
 
