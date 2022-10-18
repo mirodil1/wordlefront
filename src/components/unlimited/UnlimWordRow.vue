@@ -122,7 +122,8 @@ export default {
 
                          // send result to user
                         let tg = window.Telegram.WebApp;
-                        tg.sendData("Топилган сўзлар сони — ",this.$store.state.unlimSequenceVictory)
+                        let text = `Топилган сўзлар сони — ${this.$store.state.unlimSequenceVictory}`
+                        tg.sendData(text)
                         
                         this.$store.state.unlimSequenceVictory = 0
                         localStorage.setItem("unlimSequenceVictory", parseInt(0))
