@@ -6,7 +6,6 @@
                     <button class="delete is-pulled-right" @click="removeAbout" aria-label="close"></button>
                     <div class="instruction">
                         <p><strong>Ўйин қоидалари</strong></p>
-                        <p>{{user}}</p>
                         <br>    
                         <p>6 та уринишда кун <strong>СЎЗ</strong>ини топинг</p>
                         <br>
@@ -55,7 +54,6 @@ export default {
     name: "About",
     data() {
         return {
-            user: "none"
         }
     },
     props: {
@@ -65,14 +63,8 @@ export default {
         
     },
     mounted(){
-        this.userData()
     },
     methods: {
-        userData() {
-            const tg = window.Telegram.WebApp
-            this.user = tg.initDataUnsafe.user.id
-            console.log(this.user)
-        },
         removeAbout() {
           this.$store.state.aboutStatus = false
         },
