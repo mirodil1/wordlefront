@@ -87,9 +87,6 @@
     methods: {
       getWords() {
           if (localStorage.getItem('unlimIsNewUser')=="true" || localStorage.getItem('unlimFinished')=="true" ) {
-              console.log(localStorage.getItem('unlimIsNewUser'))
-              console.log(localStorage.getItem('unlimFinished'))
-              console.log(localStorage.getItem("unlimCurrentGuessIndex"))
               this.$store.state.unlimGuesses = ["", "", "", "", "", ""],
               this.$store.state.unlimColorList = [["", "", "", "", ""], ["", "", "", "", ""], ["", "", "", "", ""], ["", "", "", "", ""], ["", "", "", "", ""], ["", "", "", "", ""]],
               this.$store.state.unlimGuessedLetters = { miss: [], found: [], hint: [] },
@@ -103,7 +100,6 @@
               localStorage.getItem('unlimIsNewUser', false)
               
               var num = Math.floor(Math.random() * 2001)
-              console.log(num)
               this.$store.state.unlimSolution = this.$store.state.words_list[num]
               console.log(this.$store.state.unlimSolution)
               localStorage.setItem("unlimSolution", this.$store.state.unlimSolution);
