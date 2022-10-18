@@ -32,7 +32,23 @@ export default createStore({
       0,
     ],
     gameOver: false,
-    passedDay: 0
+    passedDay: 0,
+
+  // Unlim
+    unlimSolution: "",
+    unlimColorList: [["", "", "", "", ""], ["", "", "", "", ""], ["", "", "", "", ""], ["", "", "", "", ""], ["", "", "", "", ""], ["", "", "", "", ""]],
+    unlimGuesses: ["", "", "", "", "", ""],
+    unlimGuessedLetters: {
+      miss: [],
+      found: [],
+      hint: []
+    },
+    unlimCurrentGuessIndex: 0,
+    unlimLastSubmitted: "",
+    unlimSequenceVictory: 0,
+    newGame: false,
+    unlimIsNewUser: null,
+    unlimFinished: null,
   },
   mutations: {
     initializeValue(state) {
@@ -91,14 +107,75 @@ export default createStore({
         state.victoryPercentage = parseInt(localStorage.getItem("victoryPercentage"))
       }
     },
+
+    unlimInitializeValue(state) {
+
+      if (localStorage.getItem('unlimIsNewUser')) {
+        console.log(localStorage.getItem('unlimIsNewUser'))
+        localStorage.setItem('unlimIsNewUser', false)
+      } else {
+        localStorage.setItem('unlimIsNewUser', true)
+      }
+
+      if (localStorage.getItem("unlimSolution")){
+        state.unlimSolution = localStorage.getItem("unlimSolution");
+        console.log(state.unlimSolution)
+      }
+    
+      if (localStorage.getItem("unlimColor")) {
+        state.unlimColorList = JSON.parse(localStorage.getItem("unlimColor"));
+      } else {
+        localStorage.setItem("unlimColor", JSON.stringify(state.unlimColorList));
+      }
+
+      if (localStorage.getItem("unlimGuesses")) {
+        state.unlimGuesses = JSON.parse(localStorage.getItem("unlimGuesses"));
+      } else {
+        localStorage.setItem("unlimGuesses", JSON.stringify(state.unlimGuesses));
+      }
+
+      if (localStorage.getItem("unlimGuessedLetters")) {
+        state.unlimGuessedLetters = JSON.parse(localStorage.getItem("unlimGuessedLetters"));
+      } else {
+        localStorage.setItem("unlimGuessedLetters", JSON.stringify(state.unlimGuessedLetters));
+      }
+
+      if (localStorage.getItem("unlimCurrentGuessIndex")) {
+        state.unlimCurrentGuessIndex = parseInt(localStorage.getItem("unlimCurrentGuessIndex"));
+        // if (localStorage.getItem("unlimFinished")=='true'){
+        //   localStorage.setItem("unlimCurrentGuessIndex", 0)
+        //   state.unlimCurrentGuessIndex = parseInt(localStorage.getItem("unlimCurrentGuessIndex"));
+        // }
+      } else {
+        localStorage.setItem("unlimCurrentGuessIndex", parseInt(state.unlimCurrentGuessIndex));
+      }
+
+      if (localStorage.getItem("unlimSequenceVictory")) {
+        state.unlimSequenceVictory = parseInt(localStorage.getItem("unlimSequenceVictory"))
+      } else {
+        localStorage.setItem("unlimSequenceVictory", parseInt(state.unlimSequenceVictory));
+      }
+
+    },
+
     checkWinner(state) {
       if (localStorage.getItem('lastSubmitted')==state.solution) {
         state.isFinished = true
-        // localStorage.setItem("isWinner", true)
       } else if (parseInt(localStorage.getItem('currentGuessIndex'))>=6) {
         state.isFinished = true
       }
+
     },
+
+    unlimCheckWinner(state) {
+      if (localStorage.getItem('unlimLastSubmitted')==state.unlimSolution) {
+        state.isFinished = true
+        // localStorage.setItem("isWinner", true)
+      } else if (parseInt(localStorage.getItem('unlimCurrentGuessIndex'))>=6) {
+        state.isFinished = true
+      }
+    },
+
     setIsWinner(state, status) {
       state.isWinner = status
       console.log(state.isWinner)
