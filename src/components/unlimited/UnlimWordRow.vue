@@ -122,7 +122,7 @@ export default {
 
                          // send result to user
                         let tg = window.Telegram.WebApp;
-                        let text = `${this.$store.state.unlimSolution}\n`
+                        let text = `${this.$store.state.unlimSolution}\n`.toUpperCase()
                         text += `Топилган сўзлар сони — ${this.$store.state.unlimSequenceVictory}`
                         tg.sendData(text)
                         
