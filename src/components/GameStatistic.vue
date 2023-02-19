@@ -130,8 +130,8 @@
             // Output the result in an element with id="demo"
             // this.timerP = hours + ":"
             // + minutes + ":" + seconds;
-            document.getElementById("demo").innerHTML = (hours <  10 ? "0" + hours : hours) + ":" +
-            (minutes <  10 ? "0" + minutes : minutes) + ":" +  (seconds <  10 ? "0" + seconds  : seconds);
+            document.getElementById("demo").innerHTML = (hours <  10 ? "0" + hours.toString() : hours.toString()) + ":" +
+            (minutes <  10 ? "0" + minutes.toString() : minutes.toString()) + ":" +  (seconds <  10 ? "0" + seconds.toString()  : seconds.toString());
                 
             // If the count down is over, write some text 
             if (distance < 0) {
