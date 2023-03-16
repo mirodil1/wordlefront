@@ -14,6 +14,7 @@
 <script>
 import Letter from './Letter.vue'
 import { toast } from 'bulma-toast'
+import axios from 'axios'
 
 export default {
     name: "WordRow",
@@ -32,6 +33,34 @@ export default {
     },
     components: {
         Letter
+    },
+    methods: {
+        async submitData() {
+            let state = this.$store.state;
+            let formData = {
+                current_guess_index: state.currentGuessIndex,
+                color_list: JSON.stringify(state.colorList),
+                guessed_letters: JSON.stringify(state.guessedLetters),
+                guesses: JSON.stringify(state.guesses),
+                number_of_victory: state.numberOfVictory,
+                number_of_games: state.numberOfGames,
+                last_submitted: state.lastSubmitted,
+                sequance_victory: state.sequenceVictory,
+                sequance_victory_records: state.sequenceVictoryRecord,
+                victory: state.victoryPercentage,
+                user_tries: JSON.stringify(state.userTries),
+                true_guess: JSON.stringify(state.trueGuess),
+                is_finished: state.isFinished,
+            };
+            await axios
+              .put(`api/v1/daily-statistics/474796533`, formData)
+              .then((response) => {
+                console.log(response.data)
+              })
+              .catch((error) => {
+                console.log(error);
+              });
+        }
     },
     watch: {
         submitted: {
@@ -66,7 +95,7 @@ export default {
                         this.$store.state.userTries[this.$store.state.currentGuessIndex-1][i] = userTries[i]
                         await new Promise((resolve) => setTimeout(resolve, 500));
                     }
-                    localStorage.setItem("color", JSON.stringify(this.$store.state.colorList))
+                    // localStorage.setItem("color", JSON.stringify(this.$store.state.colorList))
                     localStorage.setItem("userTries", JSON.stringify(this.$store.state.userTries))
 
                     if (s == v) {
@@ -74,13 +103,14 @@ export default {
                         this.$store.commit('setIsWinner', true)
                         this.$store.state.gameOver = true
                         // update and set number of victory
-                        let numberOfVictory = this.$store.state.numberOfVictory
-                        localStorage.setItem('numberOfVictory', parseInt(numberOfVictory)+1)
+                        // let numberOfVictory = this.$store.state.numberOfVictory
+                        // localStorage.setItem('numberOfVictory', parseInt(numberOfVictory)+1)
                         this.$store.state.lastSubmitted = s
+                        this.$store.state.numberOfVictory++
                         
                         // update and set true guesses value
                         this.$store.state.trueGuess[this.$store.state.currentGuessIndex-1] = this.$store.state.trueGuess[this.$store.state.currentGuessIndex-1] + 1
-                        localStorage.setItem("trueGuess", JSON.stringify(this.$store.state.trueGuess))
+                        // localStorage.setItem("trueGuess", JSON.stringify(this.$store.state.trueGuess))
 
                         // message when found word
                         toast({
@@ -106,12 +136,18 @@ export default {
                             position: 'top-center',
                         })
                     }
-                    this.$store.commit('checkWinner')
-                    this.$store.commit('checkNumberOfGames')
+                    Promise.all([
+                        this.$store.commit('checkWinner'),
+                        this.$store.commit('checkNumberOfGames')
+                    ]).then(()=>{
+                        this.submitData()
+                    }).catch(error => {
+                        console.log('An erro occured',error)
+                    })
+                    
                 }
             }
         },
     },
 }
 </script>
-

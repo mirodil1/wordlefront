@@ -103,6 +103,7 @@
               this.$store.state.unlimSolution = this.$store.state.words_list[num]
               console.log(this.$store.state.unlimSolution)
               localStorage.setItem("unlimSolution", this.$store.state.unlimSolution);
+              console.log(this.$store.state.words_list[num])
               return this.$store.state.words_list[num]
           }
       },

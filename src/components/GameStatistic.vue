@@ -10,33 +10,6 @@
             <br>
             <p class="has-text-centered  is-size-5">Кун сўзи янгиланишигача:</p>
             <p id="demo" class="has-text-bold has-text-centered is-size-2"></p>
-
-            <!-- <div class="columns px-4 py-3 is-flex">
-                <div class="column px-4">
-                <p class="has-text-centered is-size-3">{{this.$store.state.numberOfGames}}</p>
-                <p class="has-text-centered is-size-7">та ўйин</p>
-                </div>
-                <div class="column px-4">
-                <p class="has-text-centered is-size-3">{{this.$store.state.victoryPercentage}}</p>
-                <p class="has-text-centered is-size-7">% ютуқ</p>
-                </div>
-                <div class="column px-4">
-                <p class="has-text-centered is-size-3">{{this.$store.state.sequenceVictory}}</p>
-                <p class="has-text-centered is-size-7">Кетма-кет ғалаба</p>
-                </div>
-                <div class="column px-4">
-                <p class="has-text-centered is-size-3">{{this.$store.state.sequenceVictoryRecord}}</p>
-                <p class="has-text-centered is-size-7">Кетма-кет ғалабалар рекорди</p>
-                </div>
-            </div>
-            <div class="columns px-4 is-flex">
-                <div class="column">
-                <p id="demo" class="has-text-bold has-text-centered is-size-6">Янги сўз киритилишини кутинг</p>
-                </div>
-                <div class="column">
-                <button class="button is-primary has-text-centered is-centered" @click="share">УЛАШИШ</button>
-                </div>
-            </div> -->
             </section>
         </div>
         </div>
@@ -44,6 +17,8 @@
 </template>
 
 <script>
+// import axios from 'axios';
+
     export default {
     name: "GameStatistic",
     data() {
@@ -52,14 +27,15 @@
             data: "",
             userTries: "",
             setEmoji: "",
-        }
+        },
+        userData: "",
        }
     },
     props: {
         gameOver: Boolean
     },
     mounted() {
-        this.timer()
+        // this.timer()
     },
     watch: {
         gameOver: {
@@ -73,7 +49,30 @@
         }
     },
     methods: {
-        sendResult() {
+        async sendResult() {
+            // console.log(this.$store.state.victoryPercentage)
+            // console.log(this.$store.state.sequenceVictory)
+            // console.log(this.$store.state.sequenceVictoryRecord)
+            // console.log(this.$store.state.today)
+            // console.log(this.$store.state.numberOfGames)
+
+            // let formData = {
+            //     victory: this.$store.state.victoryPercentage,
+            //     number_of_games: this.$store.state.numberOfGames,
+            //     number_of_victory: this.$store.state.numberOfVictory,
+            //     sequance_victory: this.$store.state.sequenceVictory,
+            //     sequance_victory_records: this.$store.state.sequenceVictoryRecord,
+            //     is_finished: true
+            // }
+            // await axios
+            //     .put(`api/v1/daily-statistics/474796533`, formData)
+            //     .then(response => {
+            //         this.userData = response.data
+            //         console.log(this.userData)
+            //     })
+            //     .catch(error => {
+            //         console.log(error)
+            //     })
             let tg = window.Telegram.WebApp;
             let emoji = ["🤯", "🤩", "😎", "🥳", "👍", "👏"]
             let statText = "<b>СТАТИСТИКА</b>\n\n"
@@ -102,6 +101,7 @@
             this.statData.data = statText
             this.statData.userTries = userTry
             this.statData.setEmoji = this.$store.state.isWinner ? emoji[this.$store.state.currentGuessIndex-1] : "☹️"
+            console.log(this.statData)
             tg.sendData(JSON.stringify(this.statData))
         },
         removeStat() {
@@ -148,6 +148,5 @@
 <style scoped>
     .modal-background {
         opacity: 0.3 !important;
-
     }
 </style>

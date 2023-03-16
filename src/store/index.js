@@ -33,7 +33,7 @@ export default createStore({
     ],
     gameOver: false,
     passedDay: 0,
-
+    submitted: false,
   // Unlim
     unlimSolution: "",
     unlimColorList: [["", "", "", "", ""], ["", "", "", "", ""], ["", "", "", "", ""], ["", "", "", "", ""], ["", "", "", "", ""], ["", "", "", "", ""]],
@@ -159,9 +159,9 @@ export default createStore({
     },
 
     checkWinner(state) {
-      if (localStorage.getItem('lastSubmitted')==state.solution) {
+      if (state.lastSubmitted==state.solution) {
         state.isFinished = true
-      } else if (parseInt(localStorage.getItem('currentGuessIndex'))>=6) {
+      } else if (state.currentGuessIndex>=6) {
         state.isFinished = true
       }
 
@@ -181,55 +181,73 @@ export default createStore({
       console.log(state.isWinner)
     },
     checkNumberOfGames(state) {
-      if (localStorage.getItem("NumberOfGames") === null) {
-          localStorage.setItem("NumberOfGames", 0)
-          state.numberOfGames = localStorage.getItem("NumberOfGames")
-      }
+
       if (state.currentGuessIndex >= 6 || state.isWinner) {
-          let counter = localStorage.getItem("NumberOfGames")
-          localStorage.setItem("NumberOfGames", parseInt(counter)+1)
-          state.numberOfGames = parseInt(localStorage.getItem("NumberOfGames"))
+        state.numberOfGames++
       }
 
-      if (localStorage.getItem("numberOfsequenceVictory")) {
-        if (state.lastSubmitted == state.solution) {
-          let numberOfsequenceVictory = localStorage.getItem("numberOfsequenceVictory")
-          localStorage.setItem("numberOfsequenceVictory", parseInt(numberOfsequenceVictory)+1)
-          state.sequenceVictory = parseInt(localStorage.getItem("numberOfsequenceVictory"))
-        } else if (state.currentGuessIndex >= 6) {
-          state.sequenceVictory = 0
-          localStorage.setItem("numberOfsequenceVictory", state.sequenceVictory)
-        } else {
-          state.sequenceVictory = parseInt(localStorage.getItem("numberOfsequenceVictory"))
-        }
-      } else if (state.isWinner) {
-        localStorage.setItem("numberOfsequenceVictory", 1)
-        state.sequenceVictory = parseInt(localStorage.getItem("numberOfsequenceVictory"))
-      } else if (!state.isWinner) {
-        localStorage.setItem("numberOfsequenceVictory", 0)
-        state.sequenceVictory = parseInt(localStorage.getItem("numberOfsequenceVictory"))
+      if (state.lastSubmitted == state.solution) {
+        state.sequenceVictory++
+      } else if (state.currentGuessIndex >= 6) {
+        state.sequenceVictory = 0
       }
 
-      if (localStorage.getItem("numberOfsequenceVictoryRecord")) {
-        if (state.sequenceVictory > state.sequenceVictoryRecord) {
-          state.sequenceVictoryRecord = state.sequenceVictory
-          localStorage.setItem("numberOfsequenceVictoryRecord", state.sequenceVictoryRecord)
-        } else {
-          state.sequenceVictoryRecord = localStorage.getItem("numberOfsequenceVictoryRecord")
-        }
-      } else if (state.isWinner) {
-        localStorage.setItem("numberOfsequenceVictoryRecord", 1)
-        state.sequenceVictoryRecord = parseInt(localStorage.getItem("numberOfsequenceVictoryRecord"))
-      } else if (!state.isWinner) {
-        localStorage.setItem("numberOfsequenceVictoryRecord", 0)
-        state.sequenceVictoryRecord = parseInt(localStorage.getItem("numberOfsequenceVictoryRecord"))
+      if (state.sequenceVictory > state.sequenceVictoryRecord) {
+        state.sequenceVictoryRecord = state.sequenceVictory
       }
 
-      if (localStorage.getItem("numberOfVictory")) {
-        state.numberOfVictory = localStorage.getItem("numberOfVictory")
-        state.victoryPercentage = Math.round(state.numberOfVictory * 100 / state.numberOfGames)
-        localStorage.setItem("victoryPercentage", state.victoryPercentage)
-      }
+      state.victoryPercentage = Math.round(state.numberOfVictory * 100 / state.numberOfGames)
+
+      // ====================================================================================================
+      // if (localStorage.getItem("NumberOfGames") === null) {
+      //     localStorage.setItem("NumberOfGames", 0)
+      //     state.numberOfGames = localStorage.getItem("NumberOfGames")
+      // }
+      // if (state.currentGuessIndex >= 6 || state.isWinner) {
+      //     let counter = localStorage.getItem("NumberOfGames")
+      //     localStorage.setItem("NumberOfGames", parseInt(counter)+1)
+      //     state.numberOfGames = parseInt(localStorage.getItem("NumberOfGames"))
+      // }
+
+      // if (localStorage.getItem("numberOfsequenceVictory")) {
+      //   if (state.lastSubmitted == state.solution) {
+      //     let numberOfsequenceVictory = localStorage.getItem("numberOfsequenceVictory")
+      //     localStorage.setItem("numberOfsequenceVictory", parseInt(numberOfsequenceVictory)+1)
+      //     state.sequenceVictory = parseInt(localStorage.getItem("numberOfsequenceVictory"))
+      //   } else if (state.currentGuessIndex >= 6) {
+      //     state.sequenceVictory = 0
+      //     localStorage.setItem("numberOfsequenceVictory", state.sequenceVictory)
+      //   } else {
+      //     state.sequenceVictory = parseInt(localStorage.getItem("numberOfsequenceVictory"))
+      //   }
+      // } else if (state.isWinner) {
+      //   localStorage.setItem("numberOfsequenceVictory", 1)
+      //   state.sequenceVictory = parseInt(localStorage.getItem("numberOfsequenceVictory"))
+      // } else if (!state.isWinner) {
+      //   localStorage.setItem("numberOfsequenceVictory", 0)
+      //   state.sequenceVictory = parseInt(localStorage.getItem("numberOfsequenceVictory"))
+      // }
+
+      // if (localStorage.getItem("numberOfsequenceVictoryRecord")) {
+      //   if (state.sequenceVictory > state.sequenceVictoryRecord) {
+      //     state.sequenceVictoryRecord = state.sequenceVictory
+      //     localStorage.setItem("numberOfsequenceVictoryRecord", state.sequenceVictoryRecord)
+      //   } else {
+      //     state.sequenceVictoryRecord = localStorage.getItem("numberOfsequenceVictoryRecord")
+      //   }
+      // } else if (state.isWinner) {
+      //   localStorage.setItem("numberOfsequenceVictoryRecord", 1)
+      //   state.sequenceVictoryRecord = parseInt(localStorage.getItem("numberOfsequenceVictoryRecord"))
+      // } else if (!state.isWinner) {
+      //   localStorage.setItem("numberOfsequenceVictoryRecord", 0)
+      //   state.sequenceVictoryRecord = parseInt(localStorage.getItem("numberOfsequenceVictoryRecord"))
+      // }
+
+      // if (localStorage.getItem("numberOfVictory")) {
+      //   state.numberOfVictory = localStorage.getItem("numberOfVictory")
+      //   state.victoryPercentage = Math.round(state.numberOfVictory * 100 / state.numberOfGames)
+      //   localStorage.setItem("victoryPercentage", state.victoryPercentage)
+      // }
     }
   },
   actions: {

@@ -8,7 +8,7 @@ import 'simple-keyboard/build/css/index.css';
 
 export default {
   data: () => ({
-  keyboard: null
+    keyboard: null,
   }),
   name: 'KeyBoard',
   props: {
@@ -50,15 +50,15 @@ export default {
         },
         {
           class: "df-dark",
-          buttons: JSON.parse(localStorage.getItem("guessedLetters")).miss.length > 0 ? JSON.parse(localStorage.getItem("guessedLetters")).miss.map(name => name.toUpperCase()).join(" ") : 'q'
+          buttons: this.$store.state.guessedLetters.miss.length > 0 ? this.$store.state.guessedLetters.miss.map(name => name.toUpperCase()).join(" ") : 'q'
         },
         {
           class: "df-success",
-          buttons: JSON.parse(localStorage.getItem("guessedLetters")).miss.length > 0 ? JSON.parse(localStorage.getItem("guessedLetters")).found.map(name => name.toUpperCase()).join(" ") : 'q'
+          buttons: this.$store.state.guessedLetters.miss.length > 0 ? this.$store.state.guessedLetters.found.map(name => name.toUpperCase()).join(" ") : 'q'
         },
         {
           class: "df-warning",
-          buttons: JSON.parse(localStorage.getItem("guessedLetters")).miss.length > 0 ? JSON.parse(localStorage.getItem("guessedLetters")).hint.map(name => name.toUpperCase()).join(" ") : 'q'
+          buttons: this.$store.state.guessedLetters.miss.length > 0 ? this.$store.state.guessedLetters.hint.map(name => name.toUpperCase()).join(" ") : 'q'
         }
       ],
       onChange: this.onChange,
