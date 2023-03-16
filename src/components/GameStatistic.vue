@@ -111,33 +111,32 @@
             var tomorrow =  new Date().getDate() + 1
             var month = new Date().getMonth()+1
             var year = new Date().getFullYear()
-            var countDownDate = new Date(`${month} ${tomorrow} ${year} 00:00:00`)
+            var countDownDate = new Date(year, month, tomorrow, 0, 0, 0)
 
             // Update the count down every 1 second
             var x = setInterval(function() {
-
-            // Get today's date and time
-            var now = new Date().getTime();
+                // Get today's date and time
+                var now = new Date().getTime();
+                    
+                // Find the distance between now and the count down date
+                var distance = countDownDate.getTime() - now;
                 
-            // Find the distance between now and the count down date
-            var distance = countDownDate.getTime() - now;
-            
-            // Time calculations for days, hours, minutes and seconds
-            // var days = Math.floor(distance / (1000 * 60 * 60 * 24));
-            var hours = Math.floor((distance % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60));
-            var minutes = Math.floor((distance % (1000 * 60 * 60)) / (1000 * 60));
-            var seconds = Math.floor((distance % (1000 * 60)) / 1000);
-            // Output the result in an element with id="demo"
-            // this.timerP = hours + ":"
-            // + minutes + ":" + seconds;
-            document.getElementById("demo").innerHTML = (hours <  10 ? "0" + hours : hours) + ":" +
-            (minutes <  10 ? "0" + minutes : minutes) + ":" +  (seconds <  10 ? "0" + seconds  : seconds);
-                
-            // If the count down is over, write some text 
-            if (distance < 0) {
-                clearInterval(x);
-                document.getElementById("demo").innerHTML = "Янги сўз киритилишини кутинг";
-            }
+                // Time calculations for days, hours, minutes and seconds
+                // var days = Math.floor(distance / (1000 * 60 * 60 * 24));
+                var hours = Math.floor((distance % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60));
+                var minutes = Math.floor((distance % (1000 * 60 * 60)) / (1000 * 60));
+                var seconds = Math.floor((distance % (1000 * 60)) / 1000);
+                // Output the result in an element with id="demo"
+                // this.timerP = hours + ":"
+                // + minutes + ":" + seconds;
+                document.getElementById("demo").innerHTML = (hours <  10 ? "0" + hours : hours) + ":" +
+                (minutes <  10 ? "0" + minutes : minutes) + ":" +  (seconds <  10 ? "0" + seconds  : seconds);
+                    
+                // If the count down is over, write some text 
+                if (distance < 0) {
+                    clearInterval(x);
+                    document.getElementById("demo").innerHTML = "Янги сўз киритилишини кутинг";
+                }
             }, 1000);
         }
     },
