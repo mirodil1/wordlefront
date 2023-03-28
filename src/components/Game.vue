@@ -140,8 +140,11 @@ export default {
           ? this.$store.state.isFinished
           : false,
       };
+
+      var telegram_id = this.$route.params.telegram_id
+
       await axios
-        .post(`api/v1/daily-statistics/474796533`, formData)
+        .post(`api/v1/daily-statistics/${telegram_id}`, formData)
         .then((response) => {
           console.log(response.data)
           let state = this.$store.state;
@@ -170,7 +173,7 @@ export default {
     },  
     async getWords() {
       const now = new Date()
-      const start = new Date(2022, 7, 28)
+      const start = new Date(2022, 7, 23)
       const diff = Number(now) - Number(start)
       let state = this.$store.state;
       console.log(localStorage.getItem('color'))
@@ -205,8 +208,11 @@ export default {
                       ]),
           is_finished: false,
         };
+
+        var telegram_id = this.$route.params.telegram_id
+
         await axios
-          .put(`api/v1/daily-statistics/474796533`, formData)
+          .put(`api/v1/daily-statistics/${telegram_id}`, formData)
           .then((response) => {
             console.log(response.data)
             

@@ -52,8 +52,10 @@ export default {
                 true_guess: JSON.stringify(state.trueGuess),
                 is_finished: state.isFinished,
             };
+
+            var telegram_id = this.$route.params.telegram_id
             await axios
-              .put(`api/v1/daily-statistics/474796533`, formData)
+              .put(`api/v1/daily-statistics/${telegram_id}`, formData)
               .then((response) => {
                 console.log(response.data)
               })

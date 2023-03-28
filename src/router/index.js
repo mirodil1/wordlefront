@@ -3,7 +3,7 @@ import Game from '../components/Game.vue'
 import Unlimited from '../components/unlimited/Unlimited.vue'
 const routes = [
   {
-    path: '/',
+    path: '/:telegram_id',
     name: 'Game',
     component: Game
   },
