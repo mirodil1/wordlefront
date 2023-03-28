@@ -148,6 +148,9 @@ export default {
                         if (this.gameOver) {
                             this.$store.state.gameOver = true
                         }
+                        else {
+                            this.$store.state.gameOver = false
+                        }
                     }).catch(error => {
                         console.log('An error occured',error)
                     })
