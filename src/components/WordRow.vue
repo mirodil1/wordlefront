@@ -29,6 +29,7 @@ export default {
             colors: ["", "", "", "", ""],
             isActive: false,
             victoryMessage: ["ДАҲО", "АЖОЙИБ", "БАРАКАЛЛА", "ЗЎР", "ҚОЙИЛ", "УДДАЛАДИК"],
+            gameOver: false
         }
     },
     components: {
@@ -103,7 +104,7 @@ export default {
                     if (s == v) {
                         localStorage.setItem('lastSubmitted', s)
                         this.$store.commit('setIsWinner', true)
-                        this.$store.state.gameOver = true
+                        this.gameOver = true
                         // update and set number of victory
                         // let numberOfVictory = this.$store.state.numberOfVictory
                         // localStorage.setItem('numberOfVictory', parseInt(numberOfVictory)+1)
@@ -127,7 +128,7 @@ export default {
                     } else if (this.$store.state.currentGuessIndex >= 6) {
                         // solution msg if cannot find word
                         this.$store.commit('setIsWinner', false)
-                        this.$store.state.gameOver = true
+                        this.gameOver = true
                         toast({
                             message: this.$store.state.solution,
                             type: 'is-dark is-light',
@@ -143,8 +144,12 @@ export default {
                         this.$store.commit('checkNumberOfGames')
                     ]).then(()=>{
                         this.submitData()
+                    }).then(()=> {
+                        if (this.gameOver) {
+                            this.$store.state.gameOver = true
+                        }
                     }).catch(error => {
-                        console.log('An erro occured',error)
+                        console.log('An error occured',error)
                     })
                     
                 }
